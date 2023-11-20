@@ -11,26 +11,32 @@ st.sidebar.header("Country Payroll")
 
 data = st.session_state.data
 
-columns = data[0]
-employee_data = data[1:]
-df = pd.DataFrame(employee_data, columns=columns)
+if not data:
+    st.warning("No data loaded. Please upload an Excel file on the load page.")
+else:
+    columns = data[0]
+    employee_data = data[1:]
+    df = pd.DataFrame(employee_data, columns=columns)
 
-# Contar el número de empleados por país
-employee_count_by_country = df['Country'].value_counts().reset_index()
-employee_count_by_country.columns = ['Country', 'Employee Count']
+    # Count the number of employees by country
+    employee_count_by_country = df['Country'].value_counts().reset_index()
+    employee_count_by_country.columns = ['Country', 'Employee Count']
 
-# Crear el gráfico de mapa
-fig =  px.choropleth(
-    employee_count_by_country,
-    locations='Country',
-    locationmode='country names',
-    color='Employee Count',
-    color_continuous_scale='Viridis',
-    title='Número de Empleados por País en América',
-    labels={'Employee Count': 'Número de Empleados'}
-) 
-fig_bar = px.bar(employee_count_by_country, x='Country', y='Employee Count', title='Número de Empleados por País')
+    if not employee_count_by_country.empty:
+        # Create the choropleth map
+        fig = px.choropleth(
+            employee_count_by_country,
+            locations='Country',
+            locationmode='country names',
+            color='Employee Count',
+            color_continuous_scale='Viridis',
+            title='Number of Employees by Country in America',
+            labels={'Employee Count': 'Number of Employees'}
+        ) 
+        fig_bar = px.bar(employee_count_by_country, x='Country', y='Employee Count', title='Number of Employees by Country')
 
-# Mostrar el gráfico en Streamlit
-st.plotly_chart(fig)
-st.plotly_chart(fig_bar)
+        # Show the chart in Streamlit
+        st.plotly_chart(fig)
+        st.plotly_chart(fig_bar)
+    else:
+        st.warning("No data available to display.")

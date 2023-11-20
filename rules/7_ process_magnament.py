@@ -1,4 +1,5 @@
 from tools import log_message
+from openpyxl.utils import get_column_letter
 
 def process_magnament(sheet):
     if sheet.title == "Comp Management":
@@ -6,17 +7,31 @@ def process_magnament(sheet):
         
         
         for row in range (2, last_row +1):
-            # for calculate Non cash out benefits
-            could_guru = sheet.cell(row=row, column=sheet['R'][0].column).value or 0 
-            accounting_advice = sheet.cell(row=row, column=sheet['T'][0].column).value or 0
+            R = sheet['R'][0].column
+            T = sheet['T'][0].column
+            O = sheet['O'][0].column
+            P = sheet['P'][0].column
+            X = sheet['X'][0].column
+            I = sheet['I'][0].column
+            V = sheet['V'][0].column
+            Y = sheet['Y'][0].column
+            U = sheet['U'][0].column
             
-            sheet.cell(row=row, column=sheet['U'][0].column).value = could_guru  + accounting_advice 
+            # Calculate Non cash out benefits
             
+            sheet[f'U{row}'].value = f'={get_column_letter(R)}{row}+{get_column_letter(T)}{row}'
+
             # Designated Cash out benefits 
-            p_healt_care = sheet.cell(row=row, column=sheet['O'][0].column).value or 0 
-            software_reimbursement = sheet.cell(row=row, column=sheet['P'][0].column).value or 0
-            
-            sheet.cell(row=row, column=sheet['V'][0].column).value = p_healt_care  + software_reimbursement
+            sheet[f'V{row}'].value = f'={get_column_letter(O)}{row}+{get_column_letter(P)}{row}'
+
+            # Designated On Going Reimbursements 
+
+            sheet[f'Y{row}'].value = f'={get_column_letter(X)}{row}+{get_column_letter(I)}{row}+{get_column_letter(V)}{row}'
+
+            # Total 
+ 
+            sheet[f'Z{row}'].value = f'={get_column_letter(Y)}{row}+ {get_column_letter(U)}{row}'
+
             
         return sheet
     
