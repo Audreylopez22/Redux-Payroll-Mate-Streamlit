@@ -42,19 +42,6 @@ def main():
     st.subheader("Results Visualization:")
     st.write("Interactive charts with Plotly Express are used to display the distribution of employees by country.")
 
-    st.header("System Requirements")
-    st.write("1. Python 3.x")
-    st.write("2. Libraries: Streamlit, Openpyxl, Pandas, Plotly Express")
-
-    st.header("Installation")
-    st.code("pip install streamlit openpyxl pandas plotly")
-
-    st.header("Running the Application")
-    st.write("1. Clone the repository from GitHub.")
-    st.write("2. Navigate to the application directory.")
-    st.write("3. Run the following command:")
-    st.code("streamlit run Home.py")
-    st.write("4. Follow the instructions in the console to access the application in your local web browser.")
 
 if __name__ == "__main__":
     main()
