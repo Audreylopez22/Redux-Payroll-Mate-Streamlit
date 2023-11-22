@@ -33,6 +33,7 @@ def process_rules(workbook, progress_bar):
                 if filename.endswith(".py") and filename not in ["__init__.py"]]
     total_steps = len(rule_files)
     sorted_files =  sorted(rule_files)
+    log_message(sorted_files)
     
     
     for i, filename in enumerate(sorted_files):
