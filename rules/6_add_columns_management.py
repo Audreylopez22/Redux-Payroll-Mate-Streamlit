@@ -10,7 +10,7 @@ def add_columns_management(sheet):
         return sheet
     
     new_columns = ["Non cash out benefits", "Designated Cash out benefits", "Prorating",
-                "Bonus", "On Going Reimbursements", "Total", "Comments"]
+                "On Going Reimbursements", "Sub Total","Comments","Bonus/Additional", "Total"]
  
     # Obtener el número de la última columna antes de agregar las nuevas
     last_column_number_before = sheet.max_column

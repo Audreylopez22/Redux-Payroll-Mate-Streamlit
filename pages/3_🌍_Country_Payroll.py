@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 
-st.set_page_config(page_title="Country Payroll", page_icon="🌍")
+st.set_page_config(page_title="Country Payroll", page_icon="🌍",layout="wide")
 
 st.markdown("# Country Payroll")
 st.sidebar.header("Country Payroll")

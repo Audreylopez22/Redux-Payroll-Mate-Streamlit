@@ -5,7 +5,7 @@ import datetime
 import os
 import importlib
 
-st.set_page_config(page_title="Load Sheet", page_icon="📈")
+st.set_page_config(page_title="Load Sheet", page_icon="📈",layout="wide")
 
 st.markdown("# Welcome to the Excel file processing application!")
 st.sidebar.header("Welcome to the Excel file processing application! ")
@@ -30,11 +30,11 @@ def log_message(message):
     
 def process_rules(workbook, progress_bar):
     rule_files = [filename for filename in os.listdir('rules') 
-                if filename.endswith(".py") and filename not in ["__init__.py", "tools.py"]]
+                if filename.endswith(".py") and filename not in ["__init__.py"]]
     total_steps = len(rule_files)
     
     for i, filename in enumerate(os.listdir('rules')):
-        if filename.endswith(".py") and filename not in ["__init__.py", "tools.py"]:
+        if filename.endswith(".py") and filename not in ["__init__.py"]:
             rule_module_name = f"rules.{filename[:-3]}"
             rule = importlib.import_module(rule_module_name)
             if hasattr(rule, 'main') and callable(rule.main):
@@ -52,6 +52,8 @@ def main():
     st.session_state.file_hash = None
     st.session_state.download_button = None
     st.session_state.alerts = []
+    st.session_state.errors = []
+    st.session_state.info = []
 
     uploaded_file = st.file_uploader("Load an Excel file", type=["xlsx", "xls"])
 

@@ -5,7 +5,7 @@ def empty_cells(sheet):
     log_message(f"Checking empty cells for sheet: {sheet.title}")
     
     max_row = sheet.max_row
-    max_col = 11
+    max_col = 10
     
     empty_first_column_row = None
     for row in range(1, max_row + 1):
@@ -27,14 +27,14 @@ def empty_cells(sheet):
             if sheet.title == "Bonus Sheet" and sheet.cell(row=row, column=col).value is None:
                 empty_cells_persons.append(sheet.cell(row=row, column=1).value)
             elif sheet.cell(row=row, column=col).value is None:
-                empty_cells_persons.append(sheet.cell(row=row, column=2).value)
+                empty_cells_persons.append(sheet.cell(row=row, column=1).value)
         
         if empty_cells_persons:
             empty_cells[actual_column] = empty_cells_persons
 
     if empty_cells:
         formatted_list = "\n".join([f"- Column {col}, people without information: {' ; '.join(persons)}" for col, persons in empty_cells.items()])
-        st.session_state.alerts.append(f"Empty cells in sheet '{sheet.title}': \n{formatted_list}")
+        st.session_state.errors.append(f"Empty cells in sheet '{sheet.title}': \n{formatted_list}")
         
     else:
         log_message(f"No empty cells found in sheet '{sheet.title}'.")

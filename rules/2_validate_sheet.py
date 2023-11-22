@@ -4,7 +4,7 @@ def validate_sheet(sheet):
     log_message(f"Validating sheet: {sheet.title}")
 
     sheet_configurations = {
-        "Comp Management": {"expected_columns": ["Employee #", "Last name, First name", "Country",
+        "Comp Management": {"expected_columns": ["Last name, First name", "Country",
                                                 "Status","Division","Job Title","Location",
                                                 "Paid per","Pay rate","Hire Date","Birth Date",
                                                 "Private Health Care Cloud Team Status",

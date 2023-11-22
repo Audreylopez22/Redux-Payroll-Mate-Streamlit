@@ -27,11 +27,11 @@ def check_birthday_alert(sheet):
     for row in sheet.iter_rows(min_row=2, max_col=birth_date_column_index, values_only=True):
         birth_date = row[birth_date_column_index - 1]
         if isinstance(birth_date, datetime.date) and birth_date.month == today.month:
-            birthday_people.append(row[1]) 
+            birthday_people.append(row[0]) 
 
     if birthday_people:
         formatted_list = "\n".join([f"- {person}" for person in birthday_people])
-        st.session_state.alerts.append(f"People with birthdays in the current month in sheet '{sheet.title}' : \n{formatted_list}")
+        st.session_state.info.append(f"People with birthdays in the current month in sheet '{sheet.title}' : \n{formatted_list}")
 
     else:
         st.warning(f"No birthdays in the current month'.")

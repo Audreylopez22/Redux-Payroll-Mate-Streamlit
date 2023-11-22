@@ -9,8 +9,8 @@ def create_simple_sheet(workbook):
    if "Simple Sheet" not in workbook.sheetnames:
         simple_sheet = workbook.create_sheet("Simple Sheet")
 
-        new_columns = ["Name", "Base Salary", "Ongoing Reimbursements",
-                       "Total", "Comments", "Crypto Currency"]
+        new_columns = ["Name", "Base Salary", "On Going Reimbursements", "Sub Total","Comments",
+                    "Bonus/Additional", "Total"]
 
         for i, column_name in enumerate(new_columns, start=1):
             new_column_letter = get_column_letter(i)
