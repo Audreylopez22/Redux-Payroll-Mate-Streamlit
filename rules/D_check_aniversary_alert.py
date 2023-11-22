@@ -34,7 +34,7 @@ def check_aniversary_alert(sheet):
         st.session_state.info.append(f"People with an aniversary in the current month in sheet '{sheet.title}' : \n{formatted_list}")
 
     else:
-        st.warning(f"No aniversary in the current month'.")
+        st.warning(f"No aniversary in the current month")
             
 def main(workbook,progress_bar):
     for sheet in workbook:

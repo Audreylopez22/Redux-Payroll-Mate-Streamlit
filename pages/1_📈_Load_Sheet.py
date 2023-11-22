@@ -32,8 +32,10 @@ def process_rules(workbook, progress_bar):
     rule_files = [filename for filename in os.listdir('rules') 
                 if filename.endswith(".py") and filename not in ["__init__.py"]]
     total_steps = len(rule_files)
+    sorted_files =  sorted(rule_files)
     
-    for i, filename in enumerate(os.listdir('rules')):
+    
+    for i, filename in enumerate(sorted_files):
         if filename.endswith(".py") and filename not in ["__init__.py"]:
             rule_module_name = f"rules.{filename[:-3]}"
             rule = importlib.import_module(rule_module_name)
@@ -52,7 +54,7 @@ def main():
     st.session_state.file_hash = None
     st.session_state.download_button = None
     st.session_state.alerts = []
-    st.session_state.errors = []
+    st.session_state.warnings = []
     st.session_state.info = []
 
     uploaded_file = st.file_uploader("Load an Excel file", type=["xlsx", "xls"])

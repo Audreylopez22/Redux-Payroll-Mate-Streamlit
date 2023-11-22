@@ -34,7 +34,7 @@ def empty_cells(sheet):
 
     if empty_cells:
         formatted_list = "\n".join([f"- Column {col}, people without information: {' ; '.join(persons)}" for col, persons in empty_cells.items()])
-        st.session_state.errors.append(f"Empty cells in sheet '{sheet.title}': \n{formatted_list}")
+        st.session_state.alerts.append(f"Empty cells in sheet '{sheet.title}': \n{formatted_list}")
         
     else:
         log_message(f"No empty cells found in sheet '{sheet.title}'.")
