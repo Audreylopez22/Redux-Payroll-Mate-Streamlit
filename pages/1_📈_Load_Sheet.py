@@ -55,7 +55,7 @@ def main():
     st.session_state.file_hash = None
     st.session_state.download_button = None
     st.session_state.alerts = []
-    st.session_state.warnings = []
+    st.session_state.errors = []
     st.session_state.info = []
 
     uploaded_file = st.file_uploader("Load an Excel file", type=["xlsx", "xls"])
