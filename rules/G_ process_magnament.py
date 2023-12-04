@@ -5,12 +5,12 @@ from openpyxl.styles import NamedStyle
 def get_or_create_money_style(workbook):
     money_style_name = 'money'
     
-    # Verificar si el estilo 'money' ya existe
+    # Check if the 'money' style already exists
     for style in workbook._named_styles:
         if style.name == money_style_name:
             return style
 
-    # Si no existe, crear y agregar el estilo 'money'
+    # If it does not exist, create and add the style 'money'.
     money_style = NamedStyle(name=money_style_name, number_format='"$"#,##0.00')
     workbook.add_named_style(money_style)
     
@@ -23,36 +23,36 @@ def process_magnament(sheet):
         money_style = get_or_create_money_style(sheet.parent)
             
         for row in range (2, last_row +1):
-            Q = sheet['Q'][0].column
-            S = sheet['S'][0].column
-            N = sheet['N'][0].column
-            O = sheet['O'][0].column
-            L = sheet['L'][0].column
-            U = sheet['U'][0].column
-            W = sheet['W'][0].column
-            H = sheet['H'][0].column
-            X = sheet['X'][0].column
-            Z = sheet['Z'][0].column
+            Q = get_column_letter(sheet['Q'][0].column)
+            S = get_column_letter(sheet['S'][0].column)
+            N = get_column_letter(sheet['N'][0].column)
+            O = get_column_letter(sheet['O'][0].column)
+            L = get_column_letter(sheet['S'][0].column)
+            U = get_column_letter(sheet['U'][0].column)
+            W = get_column_letter(sheet['W'][0].column)
+            H = get_column_letter(sheet['H'][0].column)
+            X = get_column_letter(sheet['X'][0].column)
+            Z = get_column_letter(sheet['Z'][0].column)
             
             
             # Calculate Non cash out benefits
-            sheet[f'T{row}'].value = f'={get_column_letter(Q)}{row}+{get_column_letter(S)}{row}'
+            sheet[f'T{row}'].value = f'={Q}{row}+{S}{row}'
             sheet[f'T{row}'].style = money_style
             
             # Designated Cash out benefits 
-            sheet[f'U{row}'].value = f'={get_column_letter(N)}{row}+{get_column_letter(O)}{row}+{get_column_letter(L)}{row}'
+            sheet[f'U{row}'].value = f'={N}{row}+{O}{row}+{L}{row}'
             sheet[f'U{row}'].style = money_style
              
             # On goin 
-            sheet[f'W{row}'].value = f'={get_column_letter(U)}{row}'
+            sheet[f'W{row}'].value = f'={U}{row}'
             sheet[f'W{row}'].style = money_style
 
             # Sub Total
-            sheet[f'X{row}'].value = f'={get_column_letter(W)}{row}+{get_column_letter(H)}{row}'
+            sheet[f'X{row}'].value = f'={W}{row}+{H}{row}'
             sheet[f'X{row}'].style = money_style
             
             # Total 
-            sheet[f'AA{row}'].value = f'={get_column_letter(X)}{row}+ {get_column_letter(Z)}{row}'
+            sheet[f'AA{row}'].value = f'={X}{row}+ {Z}{row}'
             sheet[f'AA{row}'].style = money_style           
 
             

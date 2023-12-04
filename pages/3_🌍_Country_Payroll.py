@@ -9,13 +9,15 @@ st.markdown("# Country Payroll")
 st.sidebar.header("Country Payroll")
 
 
-data = st.session_state.data
+if 'data' not in st.session_state:
+    st.session_state.data = None
 
-if not data:
+
+if st.session_state.data is None:
     st.warning("No data loaded. Please upload an Excel file on the load page.")
 else:
-    columns = data[0]
-    employee_data = data[1:]
+    columns = st.session_state.data[0]
+    employee_data = st.session_state.data[1:]
     df = pd.DataFrame(employee_data, columns=columns)
 
     # Count the number of employees by country

@@ -4,12 +4,12 @@ from openpyxl.styles import NamedStyle
 def get_or_create_money_style(workbook):
     money_style_name = 'money'
     
-    # Verificar si el estilo 'money' ya existe
+    # # Check if the 'money' style already exists
     for style in workbook._named_styles:
         if style.name == money_style_name:
             return style
 
-    # Si no existe, crear y agregar el estilo 'money'
+    # If it does not exist, create and add the style 'money'.
     money_style = NamedStyle(name=money_style_name, number_format='"$"#,##0.00')
     workbook.add_named_style(money_style)
     

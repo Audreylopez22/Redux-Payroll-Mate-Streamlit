@@ -4,6 +4,8 @@ from io import BytesIO
 import datetime
 import os
 import importlib
+import formulas
+import shutil
 
 st.set_page_config(page_title="Load Sheet", page_icon="📈",layout="wide")
 
@@ -33,8 +35,6 @@ def process_rules(workbook, progress_bar):
                 if filename.endswith(".py") and filename not in ["__init__.py"]]
     total_steps = len(rule_files)
     sorted_files =  sorted(rule_files)
-    log_message(sorted_files)
-    
     
     for i, filename in enumerate(sorted_files):
         if filename.endswith(".py") and filename not in ["__init__.py"]:
@@ -49,19 +49,20 @@ def process_rules(workbook, progress_bar):
 
     return workbook
 
+
 def main():
-    
-    st.session_state.data = None
-    st.session_state.file_hash = None
-    st.session_state.download_button = None
-    st.session_state.alerts = []
-    st.session_state.errors = []
-    st.session_state.info = []
 
     uploaded_file = st.file_uploader("Load an Excel file", type=["xlsx", "xls"])
 
     if uploaded_file is not None:
+        
+        #to reset the session state when analizyded new information
+        st.session_state.alerts = []
+        st.session_state.errors = []
+        st.session_state.info = []
+        st.session_state.logs = []
         uploaded_file_contents = uploaded_file.read()
+        
         if 'file_hash' not in st.session_state or st.session_state.file_hash != hash(uploaded_file_contents):
             st.session_state.file_hash = hash(uploaded_file_contents)
         
@@ -75,26 +76,40 @@ def main():
             log_message("The Excel file is empty.")
             
         else:
-            
-            
+
             progress_bar = st.progress(0.0)
             log_message("Making modifications to the Excel file...")
             
+            # is deleted in case the files folder exists
+            if os.path.exists("files"):
+                shutil.rmtree("files")
+                
             workbook = process_rules(workbook, progress_bar)
             
             
+            # the modified or processed file is saved in memory
             modified_file = BytesIO()
             log_message("Saving modifications to the Excel file...")
             workbook.save(modified_file)
+            output_folder = "files"
             
+            #to display the data in the guarapo tab it is necessary to physically save the 
+            # calculated data and it is saved in the files folder. 
+            if not os.path.exists(output_folder):
+                os.makedirs(output_folder)
+                modified_file_path = os.path.join(output_folder, 'modified_file_forms.xlsx')
+                workbook.save(modified_file_path)
+
+            xl_model = formulas.ExcelModel().loads('files/modified_file_forms.xlsx').finish()
+            xl_model.calculate()
+            xl_model.write(dirpath='files')
             
+            # download button for the downloaded file that is in memory
             st.session_state.download_button = st.download_button(
                 label="Download modified file",
                 data=modified_file.getvalue(),
                 key='download_file.xlsx',
-                file_name='modified_file.xlsx',
-            )
-
+                file_name='modified_file.xlsx',)
 
 if __name__ == "__main__":
     main()

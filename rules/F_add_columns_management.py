@@ -12,11 +12,8 @@ def add_columns_management(sheet):
     new_columns = ["Non cash out benefits", "Designated Cash out benefits", "Prorating",
                 "On Going Reimbursements", "Sub Total","Comments","Bonus/Additional", "Total"]
  
-    # Obtener el número de la última columna antes de agregar las nuevas
     last_column_number_before = sheet.max_column
     
-
-    # Agregar 7 columnas después de la última columna
     for i, column_name in enumerate(new_columns):
         new_column_number = last_column_number_before + i + 1
         new_column_letter = get_column_letter(new_column_number)
@@ -24,7 +21,6 @@ def add_columns_management(sheet):
 
     no_fill = PatternFill(fill_type="none")
     
-    # Establecer un color específico en las nuevas columnas
     for col in range(last_column_number_before + 1, last_column_number_before + 8):
         for row in range(1, sheet.max_row + 1):
             sheet.cell(row=row, column=col).fill = no_fill       

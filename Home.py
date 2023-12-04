@@ -10,8 +10,38 @@ st.set_page_config(
 
 def main():
     st.title("Welcome to the Payroll File Processing Tool")
-    st.write("In this application, you'll find a tool designed to streamline the processing of" +
-            " payroll files. Follow the steps below to make use of this tool:")
+     # Introduction
+    st.header("Introduction")
+    st.write("The Excel file processing application is a tool designed to streamline the"+
+             " manipulation of data contained in Excel files. It utilizes Streamlit for the user"+
+             " interface and Openpyxl for data processing.")
+
+    # Streamlit
+    st.header("Streamlit")
+    st.write("Streamlit is an open-source framework that makes it easy to create web applications"+
+             " for data analysis and interactive prototypes. With Streamlit, developers can" +
+             " effortlessly turn Python scripts into web applications.")
+    st.subheader("Key Features of Streamlit")
+    st.write("1. **Simplicity:** With just a few Python commands, it's possible to create"+
+             " interactive interfaces without the need for web development expertise.")
+    st.write("2. **Dynamic Updates:** Interface elements automatically update when data or" +
+             " parameters change.")
+    st.write("3. **Easy Integration:** Easily integrates with popular libraries such as Pandas,"+ 
+             " Plotly, and Matplotlib for data visualization.")
+
+    # Openpyxl
+    st.header("Openpyxl")
+    st.write("Openpyxl is a Python library that allows reading and writing Excel files in xlsx" + 
+             " format. With Openpyxl, it's possible to programmatically manipulate spreadsheets," +
+             " cells, and data.")
+    st.subheader("Key Features of Openpyxl")
+    st.write("1. **Read and Write:** Enables reading and writing of data in Excel files.")
+    st.write("2. **Spreadsheet Manipulation:** Facilitates the creation, duplication, and deletion" +
+             " of spreadsheets.")
+    st.write("3. **Cell Formatting:** Allows formatting cells, such as styles, colors, and formulas.")
+
+    # Operation of the Application
+    st.header("Operation of the Application")
 
     # Page 1: Load an Excel File
     st.header("Page 1: Load an Excel File")
@@ -32,16 +62,34 @@ def main():
 
     # Page 2: Warnings and Alerts
     st.header("Page 2: Warnings and Alerts")
-    st.write("Here you'll find alerts generated during the execution of the rules. It will display individuals celebrating birthdays this month, those completing one year with the company, and potential employees with empty cells or missing elements in the data sheet.")
+    st.write("Here you'll find alerts generated during the execution of the rules. It will display"+
+             "individuals celebrating birthdays this month, those completing one year with the company,"+
+             "and potential employees with empty cells or missing elements in the data sheet.")
 
     # Page 3: Country Payroll
     st.header("Page 3: Country Payroll")
     st.write("This page features two graphs representing the number of employees per country.")
 
     # Page 4: Documentation
-    st.header("Page 4: Documentation")
-    st.write("Find detailed information about the technologies and methodologies used to build"+
-            "  this application.")
+    st.header("Page 4: Guarapo")
+    st.write("In this tab, you will find all the filtered information about the personnel"
+             +" belonging to the 'Guarapo B/quilla Office.' It includes:")
+    st.write("1. A table containing comprehensive information about the personnel working in this office.")
+    st.write("2. An option that allows you to export the presented table to Excel format; simply" +
+             " click on the 'Export to Excel' button.")
+    st.write("3. Finally, this will enable a button labeled 'Download Excel File',"+
+             " which allows you to download the file in .xlsx format directly.")
+
+
+    # Results Visualization
+    st.subheader("Results Visualization:")
+    st.write("Interactive charts with Plotly Express are used to display the distribution of" + 
+             " employees by country.")
+
+    # System Requirements
+    st.header("System Requirements")
+    st.write("1. Python 3.x")
+    st.write("2. Libraries: Streamlit, Openpyxl, Pandas, Plotly Express")
 
 if __name__ == "__main__":
     main()

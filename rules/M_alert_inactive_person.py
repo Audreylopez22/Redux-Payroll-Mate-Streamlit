@@ -1,6 +1,14 @@
 
 from tools import log_message
 import streamlit as st
+from openpyxl.styles import PatternFill
+
+def find_row_index_by_name(sheet, name_to_find, name_column_index):
+    for row_index,row in enumerate(sheet.iter_rows(min_row=2, max_col=name_column_index,
+                                                values_only=True), start=2):
+        if row[0] == name_to_find:
+            return row_index
+    return None
 
 def new_employee_alert(sheet):
     log_message(f"checking for new employees this month for sheet: {sheet.title}")
@@ -8,7 +16,7 @@ def new_employee_alert(sheet):
     if sheet.title != "Comp Management":
         return
 
-    # Obtener la columna de status
+    # get the column status
     status_column_index = None
     header_row = sheet[1]
     for idx, cell in enumerate(header_row, start=1):
@@ -20,7 +28,7 @@ def new_employee_alert(sheet):
         st.error("No 'Status' column found.")
         return
 
-    # Obtener una lista de personas que se encuentran inavtivas
+    # Get a list of people who are inactive
     status_inactive = "Inactive"
     status_people = []
     
@@ -28,6 +36,14 @@ def new_employee_alert(sheet):
         status_column = row[status_column_index - 1]
         if isinstance(status_column, str) and status_column.lower() == status_inactive.lower():
             status_people.append(row[0]) 
+            name_to_find = row[0]
+            
+            row_index = find_row_index_by_name(sheet, name_to_find, status_column_index)
+
+            if row_index is not None:
+                cell = sheet.cell(row=row_index, column= status_column_index)
+                cell.fill = PatternFill(start_color="FFfee599", end_color="FFfee599", fill_type="solid")
+
 
     if status_people:
         formatted_list = "\n".join([f"- {person}" for person in status_people])
