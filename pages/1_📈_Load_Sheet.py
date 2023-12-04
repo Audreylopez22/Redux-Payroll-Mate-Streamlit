@@ -99,6 +99,7 @@ def main():
                 os.makedirs(output_folder)
                 modified_file_path = os.path.join(output_folder, 'modified_file_forms.xlsx')
                 workbook.save(modified_file_path)
+                st.write(os.listdir())
 
             xl_model = formulas.ExcelModel().loads('files/modified_file_forms.xlsx').finish()
             xl_model.calculate()
