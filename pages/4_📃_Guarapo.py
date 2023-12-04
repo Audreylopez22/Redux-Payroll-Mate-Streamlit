@@ -40,10 +40,10 @@ def filter_and_display_data(sheet):
 
         if data_list:
             df = pd.DataFrame(data_list, columns=[cell.value for cell in header_row])
-
-            st.session_state.filtered_data = df
+            return df
+        
         else:
-            st.session_state.filtered_data = pd.DataFrame()
+            return pd.DataFrame()
 
 
 def main():
@@ -58,16 +58,16 @@ def main():
 
         workbook = load_workbook(uploaded_file)
 
-        filter_and_display_data(workbook.active)
+        filtered_data = filter_and_display_data(workbook.active)
 
         st.write("Filtered Data:")
-        st.write(st.session_state.filtered_data)
+        st.write(filtered_data)
 
         if st.button("Export to Excel"):
             file_path = "filtered_data.xlsx"
 
             excel_data = io.BytesIO()
-            st.session_state.filtered_data.to_excel(excel_data, index=False, header=True, engine="openpyxl")
+            filtered_data.to_excel(excel_data, index=False, header=True, engine="openpyxl")
             excel_data.seek(0)
 
             st.download_button(
