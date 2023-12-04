@@ -17,6 +17,8 @@ if os.path.exists("files"):
 
     with open(temp_filename, "rb") as file_content:
         st.session_state.temp_file_content = file_content.read() 
+else:
+    st.error("files doesn't exist")
 
 def filter_and_display_data(sheet):
     log_message(f"Filtering and displaying data for sheet: {sheet.title}")
