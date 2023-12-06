@@ -56,10 +56,6 @@ def filter_and_display_data(sheet):
 
 
 def main():
-
-        if 'temp_file_content' not in st.session_state:
-            st.warning("Cannot display data because no file has been uploaded.")
-            return
         
         with open(st.session_state.tmp_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
@@ -72,6 +68,14 @@ def main():
 
         st.write("Filtered Data:")
         st.write(filtered_data)
+        
+        if os.path.exists("/tmp"):
+            files = os.listdir("/tmp")
+            st.error(files)
+            for file in files:
+                if file.endswith(".xlsx"):
+                    os.unlink(file)
+            st.error(os.listdir("/tmp"))
 
         if st.button("Export to Excel"):
             file_path = "filtered_data.xlsx"
