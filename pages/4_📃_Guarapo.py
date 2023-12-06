@@ -41,12 +41,12 @@ def filter_and_display_data(sheet):
 
 def main():
         
-        """ with open(st.session_state.tmp_file, "rb") as file_content:
+        with open(st.session_state.tmp_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
 
-        uploaded_file = io.BytesIO(file_content) """
+        uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
 
-        workbook = load_workbook(st.session_state.tmp_file)
+        workbook = load_workbook(uploaded_file)
 
         filtered_data = filter_and_display_data(workbook.active)
 
