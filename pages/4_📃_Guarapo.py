@@ -48,6 +48,7 @@ def main():
         st.warning(os.path.getsize(st.session_state.tmp_file))
         with open(st.session_state.tmp_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
+            st.download_button("hola",file_content)
 
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
 
