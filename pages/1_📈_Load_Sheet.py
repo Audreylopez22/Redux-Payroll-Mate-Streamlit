@@ -95,10 +95,9 @@ def main():
 
                 workbook.save(modified_file_forms)
             
-            
             xl_model = formulas.ExcelModel().loads(modified_file_forms).finish()
             xl_model.calculate()
-            xl_model.write(dirpath='.')
+            xl_model.write(dirpath='tmp')
             
             # download button for the downloaded file that is in memory
             st.session_state.download_button = st.download_button(

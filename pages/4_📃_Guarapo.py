@@ -17,6 +17,9 @@ if os.path.exists("/tmp"):
 
     with open(temp_filename, "rb") as file_content:
         st.session_state.temp_file_content = file_content.read() 
+    
+    os.unlink(temp_filename)
+    os.path.exists(temp_filename)
 else:
     st.error("tmp doesn't exist")
 
@@ -82,8 +85,6 @@ def main():
 
             st.success(f"Data exported to {file_path}")
         
-        if os.path.exists("files"):
-            shutil.rmtree("files")
             
 if __name__ == "__main__":
     main()
