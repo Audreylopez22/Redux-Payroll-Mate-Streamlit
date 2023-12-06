@@ -91,11 +91,10 @@ def main():
             #to display the data in the guarapo tab it is necessary to physically save the 
             # calculated data and it is saved in the files folder. 
             with NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp_file:
-                modified_file_forms = tmp_file.name
-
-                workbook.save(modified_file_forms)
+                st.session_state.tmp_file = tmp_file.name
+                workbook.save(tmp_file.name)
             
-            xl_model = formulas.ExcelModel().loads(modified_file_forms).finish()
+            xl_model = formulas.ExcelModel().loads(tmp_file.name).finish()
             xl_model.calculate()
             xl_model.write(dirpath='tmp')
             

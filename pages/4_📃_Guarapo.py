@@ -11,10 +11,12 @@ st.set_page_config(page_title="Guarapo", page_icon="📄", layout="wide")
 st.markdown("# Guarapo")
 st.sidebar.header("Guarapo")
 
-if os.path.exists("/tmp"):
-    file = os.listdir("/tmp")
-    st.error(file)
-    temp_filename = os.path.join("/tmp", file[0])
+""" if os.path.exists("/tmp"):
+    files = os.listdir("/tmp")
+    st.error(files)
+    for file in files:
+        if file.endswith(".xlsx"):
+        temp_filename = os.path.join("/tmp", files[0])
     st.error(temp_filename)
 
     with open(temp_filename, "rb") as file_content:
@@ -23,7 +25,7 @@ if os.path.exists("/tmp"):
     os.unlink(temp_filename)
     os.path.exists(temp_filename)
 else:
-    st.error("tmp doesn't exist")
+    st.error("tmp doesn't exist") """
 
 def filter_and_display_data(sheet):
     log_message(f"Filtering and displaying data for sheet: {sheet.title}")
@@ -59,9 +61,10 @@ def main():
             st.warning("Cannot display data because no file has been uploaded.")
             return
         
-        uploaded_file_contents = st.session_state.temp_file_content
+        with open(st.session_state.tmp_file, "rb") as file_content:
+            st.session_state.tmp_file_content = file_content.read() 
 
-        uploaded_file = io.BytesIO(uploaded_file_contents)
+        uploaded_file = io.BytesIO(file_content)
 
         workbook = load_workbook(uploaded_file)
 
