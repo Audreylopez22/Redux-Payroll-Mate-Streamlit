@@ -45,6 +45,7 @@ def main():
             return
         
         st.warning(st.session_state.tmp_file)
+        st.warning(os.path.getsize(st.session_state.tmp_file))
         with open(st.session_state.tmp_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
 
@@ -62,7 +63,7 @@ def main():
             st.error(files)
             for file in files:
                 if file.endswith(".xlsx"):
-                    os.unlink(file)
+                    os.unlink(os.path.join(os.sep,"tmp",file))
             st.error(os.listdir("/tmp"))
 
         if st.button("Export to Excel"):

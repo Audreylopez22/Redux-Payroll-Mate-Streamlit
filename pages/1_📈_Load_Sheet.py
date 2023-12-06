@@ -61,7 +61,7 @@ def main():
         st.session_state.errors = []
         st.session_state.info = []
         st.session_state.logs = []
-        st.session_state.tmp_file=[]
+        st.session_state.tmp_file = ""
         uploaded_file_contents = uploaded_file.read()
         
         if 'file_hash' not in st.session_state or st.session_state.file_hash != hash(uploaded_file_contents):
