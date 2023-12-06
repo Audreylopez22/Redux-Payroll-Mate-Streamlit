@@ -5,7 +5,7 @@ import datetime
 import os
 import importlib
 import formulas
-import shutil
+from tempfile import NamedTemporaryFile
 
 st.set_page_config(page_title="Load Sheet", page_icon="📈",layout="wide")
 
@@ -79,10 +79,6 @@ def main():
 
             progress_bar = st.progress(0.0)
             log_message("Making modifications to the Excel file...")
-            
-            # is deleted in case the files folder exists
-            if os.path.exists("files"):
-                shutil.rmtree("files")
                 
             workbook = process_rules(workbook, progress_bar)
             
@@ -91,19 +87,18 @@ def main():
             modified_file = BytesIO()
             log_message("Saving modifications to the Excel file...")
             workbook.save(modified_file)
-            output_folder = "files"
             
             #to display the data in the guarapo tab it is necessary to physically save the 
             # calculated data and it is saved in the files folder. 
-            if not os.path.exists(output_folder):
-                os.makedirs(output_folder)
-                modified_file_path = os.path.join(output_folder, 'modified_file_forms.xlsx')
-                workbook.save(modified_file_path)
-                st.write(os.listdir())
+            with NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp_file:
+                modified_file_forms = tmp_file.name
 
-            xl_model = formulas.ExcelModel().loads('files/modified_file_forms.xlsx').finish()
+                workbook.save(modified_file_forms)
+            
+            
+            xl_model = formulas.ExcelModel().loads(modified_file_forms).finish()
             xl_model.calculate()
-            xl_model.write(dirpath='files')
+            xl_model.write(dirpath='.')
             
             # download button for the downloaded file that is in memory
             st.session_state.download_button = st.download_button(

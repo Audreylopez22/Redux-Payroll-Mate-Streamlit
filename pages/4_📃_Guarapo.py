@@ -11,9 +11,9 @@ st.set_page_config(page_title="Guarapo", page_icon="📄", layout="wide")
 st.markdown("# Guarapo")
 st.sidebar.header("Guarapo")
 
-if os.path.exists("files"):
-    file = os.listdir("files")
-    temp_filename = os.path.join("files", file[0])
+if os.path.exists("tmp"):
+    file = os.listdir("tmp")
+    temp_filename = os.path.join("tmo", file[0])
 
     with open(temp_filename, "rb") as file_content:
         st.session_state.temp_file_content = file_content.read() 
