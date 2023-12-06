@@ -13,7 +13,9 @@ st.sidebar.header("Guarapo")
 
 if os.path.exists("/tmp"):
     file = os.listdir("/tmp")
+    st.error("file")
     temp_filename = os.path.join("/tmp", file[0])
+    st.error("temp_filename")
 
     with open(temp_filename, "rb") as file_content:
         st.session_state.temp_file_content = file_content.read() 
