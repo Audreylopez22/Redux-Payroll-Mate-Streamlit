@@ -44,11 +44,9 @@ def main():
             st.warning("Cannot display data because no file has been uploaded.")
             return
         
-        st.warning(st.session_state.tmp_file)
         directory, file_name = os.path.split(st.session_state.tmp_file)
         file_name_uppercase = file_name.upper()
         uppercased_file = os.path.join(directory, file_name_uppercase)
-        st.warning(uppercased_file)
         
         if os.path.exists(uppercased_file):
             with open(uppercased_file, "rb") as file_content:
@@ -86,11 +84,9 @@ def main():
         
         if os.path.exists("/tmp"):
             files = os.listdir("/tmp")
-            st.error(files)
             for file in files:
                 if file.endswith((".xlsx", ".XLSX")):
                     os.unlink(os.path.join(os.sep,"tmp",file))
-            st.error(os.listdir("/tmp"))
         
             
 if __name__ == "__main__":
