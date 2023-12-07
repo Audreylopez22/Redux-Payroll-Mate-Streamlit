@@ -44,12 +44,14 @@ def main():
         
         st.warning(st.session_state.tmp_file)
         st.warning(os.path.getsize(st.session_state.tmp_file))
-        directory, file_name = os.path.split(st.session_state.tmp_file)
-        file_name_uppercase = file_name.upper()
-        uppercased_file = os.path.join(directory, file_name_uppercase)
-        st.warning(uppercased_file)
-        with open(uppercased_file, "rb") as file_content:
-            st.session_state.tmp_file_content = file_content.read() 
+        
+        if os.path.exists("/tmp"):
+            directory, file_name = os.path.split(st.session_state.tmp_file)
+            file_name_uppercase = file_name.upper()
+            uppercased_file = os.path.join(directory, file_name_uppercase)
+            st.warning(uppercased_file)
+            with open(uppercased_file, "rb") as file_content:
+                st.session_state.tmp_file_content = file_content.read() 
             
         if 'tmp_file_content' not in st.session_state:
             st.warning("Cannot display data because no file has been uploaded.")
