@@ -4,7 +4,6 @@ import io
 from openpyxl import load_workbook
 import pandas as pd
 import os
-import shutil
 
 st.set_page_config(page_title="Guarapo", page_icon="📄", layout="wide")
 
@@ -40,6 +39,7 @@ def filter_and_display_data(sheet):
 
 
 def main():
+    
         if 'tmp_file' not in st.session_state:
             st.warning("Cannot display data because no file has been uploaded.")
             return
@@ -51,11 +51,7 @@ def main():
         if os.path.exists(uppercased_file):
             with open(uppercased_file, "rb") as file_content:
                 st.session_state.tmp_file_content = file_content.read()
-            
-        if 'tmp_file_content' not in st.session_state:
-            st.warning("Cannot display data because no file has been uploaded.")
-            return
-
+                
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
 
         workbook = load_workbook(uploaded_file)

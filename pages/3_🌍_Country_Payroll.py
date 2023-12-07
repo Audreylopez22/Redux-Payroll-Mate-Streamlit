@@ -35,10 +35,16 @@ else:
             title='Number of Employees by Country in America',
             labels={'Employee Count': 'Number of Employees'}
         ) 
+        # to adjust the size of the map box in fig
+        fig.update_geos(projection_type="natural earth", showcoastlines=True)
+        fig.update_layout(height=800)
+        
         fig_bar = px.bar(employee_count_by_country, x='Country', y='Employee Count', title='Number of Employees by Country')
-
+        fig_bar.update_layout(height=500)
+        
         # Show the chart in Streamlit
-        st.plotly_chart(fig)
-        st.plotly_chart(fig_bar)
+        st.plotly_chart(fig_bar,use_container_width=True)
+        st.plotly_chart(fig ,use_container_width=True)
+        
     else:
         st.warning("No data available to display.")
