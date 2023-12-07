@@ -46,8 +46,9 @@ def main():
         
         st.warning(st.session_state.tmp_file)
         st.warning(os.path.getsize(st.session_state.tmp_file))
-        st.warning(st.session_state.tmp_file.upper())
-        with open(st.session_state.tmp_file.upper(), "rb") as file_content:
+        uppercased_file = st.session_state.tmp_file.upper()
+        st.warning(uppercased_file)
+        with open(uppercased_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
 
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
@@ -63,7 +64,7 @@ def main():
             files = os.listdir("/tmp")
             st.error(files)
             for file in files:
-                if file.endswith(".xlsx", "XLSX"):
+                if file.endswith(".xlsx", ".XLSX"):
                     os.unlink(os.path.join(os.sep,"tmp",file))
             st.error(os.listdir("/tmp"))
 
