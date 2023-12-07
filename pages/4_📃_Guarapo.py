@@ -45,7 +45,6 @@ def main():
             return
         
         st.warning(st.session_state.tmp_file)
-        st.warning(os.path.getsize(st.session_state.tmp_file))
         directory, file_name = os.path.split(st.session_state.tmp_file)
         file_name_uppercase = file_name.upper()
         uppercased_file = os.path.join(directory, file_name_uppercase)
