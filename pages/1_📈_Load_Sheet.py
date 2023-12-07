@@ -97,7 +97,7 @@ def main():
             
             xl_model = formulas.ExcelModel().loads(st.session_state.tmp_file).finish()
             xl_model.calculate()
-            log_message("se calculo el excel para guarapo")
+            log_message("The changes were made in the Excel file for the 'guarapo' sheet.")
             xl_model.write(dirpath='/tmp')
             
             # download button for the downloaded file that is in memory
