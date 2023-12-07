@@ -64,10 +64,13 @@ def main():
                 original_file.write(st.session_state.tmp_file_content)
 
             st.success(f"Archivo original exportado como {file_path}")
+            original_data = io.BytesIO(st.session_state.tmp_file_content)
+            original_data.seek(0)
+            
             st.download_button(
                 label="Descargar Archivo Original",
                 key="download_original_file",
-                data=st.session_state.tmp_file_content,
+                data=original_data,
                 file_name=file_path,
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
@@ -94,13 +97,13 @@ def main():
 
             st.success(f"Data exported to {file_path}")
         
-        """ if os.path.exists("/tmp"):
+        if os.path.exists("/tmp"):
             files = os.listdir("/tmp")
             st.error(files)
             for file in files:
                 if file.endswith(".xlsx"):
                     os.unlink(os.path.join(os.sep,"tmp",file))
-            st.error(os.listdir("/tmp")) """
+            st.error(os.listdir("/tmp"))
             
 if __name__ == "__main__":
     main()
