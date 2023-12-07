@@ -17,7 +17,6 @@ def filter_and_display_data(sheet):
     if sheet.title == "Comp Management":
         office_column_index = None
         header_row = sheet[1]
-        st.info("entra a la hoja")
         for idx, cell in enumerate(header_row, start=1):
             if cell.value == "Location":
                 office_column_index = idx
@@ -31,8 +30,6 @@ def filter_and_display_data(sheet):
             office = row[office_column_index - 1]
             if office == "Guarapo B/quilla Oficce":
                 data_list.append(row)
-        
-        st.write(data_list)
 
         if data_list:
             df = pd.DataFrame(data_list, columns=[cell.value for cell in header_row])
@@ -55,32 +52,20 @@ def main():
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
 
         workbook = load_workbook(uploaded_file)
-        
-        if st.button("Exportar Archivo Original a Excel"):
-            file_path = "uploaded_file.xlsx"
-
-            # Guardar el contenido del archivo original en un nuevo archivo Excel
-            with open(file_path, "wb") as original_file:
-                original_file.write(st.session_state.tmp_file_content)
-
-            
-            original_data = io.BytesIO(st.session_state.tmp_file_content)
-            original_data.seek(0)
-            
-            st.download_button(
-                label="Descargar Archivo Original",
-                key="download_original_file",
-                data=original_data,
-                file_name=file_path,
-                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            )
-            st.success(f"Archivo original exportado como {file_path}")
 
         filtered_data = filter_and_display_data(workbook.active)
 
         st.write("Filtered Data:")
         st.write(filtered_data)
         
+        if os.path.exists("/tmp"):
+            files = os.listdir("/tmp")
+            st.error(files)
+            for file in files:
+                if file.endswith(".xlsx"):
+                    os.unlink(os.path.join(os.sep,"tmp",file))
+            st.error(os.listdir("/tmp"))
+
         if st.button("Export to Excel"):
             file_path = "filtered_data.xlsx"
 
@@ -98,13 +83,6 @@ def main():
 
             st.success(f"Data exported to {file_path}")
         
-        if os.path.exists("/tmp"):
-            files = os.listdir("/tmp")
-            st.error(files)
-            for file in files:
-                if file.endswith(".xlsx"):
-                    os.unlink(os.path.join(os.sep,"tmp",file))
-            st.error(os.listdir("/tmp"))
             
 if __name__ == "__main__":
     main()
