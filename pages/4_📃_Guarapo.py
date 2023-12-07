@@ -66,7 +66,7 @@ def main():
             files = os.listdir("/tmp")
             st.error(files)
             for file in files:
-                if file.endswith(".xlsx", ".XLSX"):
+                if file.endswith((".xlsx", ".XLSX")):
                     os.unlink(os.path.join(os.sep,"tmp",file))
             st.error(os.listdir("/tmp"))
 
