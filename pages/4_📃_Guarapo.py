@@ -48,7 +48,7 @@ def main():
             return
         
         st.warning(st.session_state.tmp_file)
-        """ st.warning(os.path.getsize(st.session_state.tmp_file)) """
+        st.warning(os.path.getsize(st.session_state.tmp_file))
         with open(st.session_state.tmp_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
 
@@ -63,7 +63,7 @@ def main():
             with open(file_path, "wb") as original_file:
                 original_file.write(st.session_state.tmp_file_content)
 
-            st.success(f"Archivo original exportado como {file_path}")
+            
             original_data = io.BytesIO(st.session_state.tmp_file_content)
             original_data.seek(0)
             
@@ -74,6 +74,7 @@ def main():
                 file_name=file_path,
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+            st.success(f"Archivo original exportado como {file_path}")
 
         filtered_data = filter_and_display_data(workbook.active)
 
