@@ -41,9 +41,7 @@ def filter_and_display_data(sheet):
 
 def main():
         
-        if 'tmp_file_content' not in st.session_state:
-            st.warning("Cannot display data because no file has been uploaded.")
-            return
+        
         st.warning(st.session_state.tmp_file)
         st.warning(os.path.getsize(st.session_state.tmp_file))
         directory, file_name = os.path.split(st.session_state.tmp_file)
@@ -53,7 +51,9 @@ def main():
         with open(uppercased_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
             
-        
+        if 'tmp_file_content' not in st.session_state:
+            st.warning("Cannot display data because no file has been uploaded.")
+            return
 
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
 
@@ -64,14 +64,6 @@ def main():
         st.write("Filtered Data:")
         st.write(filtered_data)
         
-        if os.path.exists("/tmp"):
-            files = os.listdir("/tmp")
-            st.error(files)
-            for file in files:
-                if file.endswith((".xlsx", ".XLSX")):
-                    os.unlink(os.path.join(os.sep,"tmp",file))
-            st.error(os.listdir("/tmp"))
-
         if st.button("Export to Excel"):
             file_path = "filtered_data.xlsx"
 
@@ -88,6 +80,14 @@ def main():
             )
 
             st.success(f"Data exported to {file_path}")
+        
+        if os.path.exists("/tmp"):
+            files = os.listdir("/tmp")
+            st.error(files)
+            for file in files:
+                if file.endswith((".xlsx", ".XLSX")):
+                    os.unlink(os.path.join(os.sep,"tmp",file))
+            st.error(os.listdir("/tmp"))
         
             
 if __name__ == "__main__":
