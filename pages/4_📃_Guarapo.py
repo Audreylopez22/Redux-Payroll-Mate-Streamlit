@@ -64,6 +64,13 @@ def main():
                 original_file.write(st.session_state.tmp_file_content)
 
             st.success(f"Archivo original exportado como {file_path}")
+            st.download_button(
+                label="Descargar Archivo Original",
+                key="download_original_file",
+                data=st.session_state.tmp_file_content,
+                file_name=file_path,
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
 
         filtered_data = filter_and_display_data(workbook.active)
 
