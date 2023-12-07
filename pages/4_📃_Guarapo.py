@@ -14,7 +14,7 @@ st.sidebar.header("Guarapo")
 def filter_and_display_data(sheet):
     log_message(f"Filtering and displaying data for sheet: {sheet.title}")
 
-    if sheet.title == "COMP MANAGEMENT":
+    if sheet.title == "Comp Management":
         office_column_index = None
         header_row = sheet[1]
         st.info("entra a la hoja")
