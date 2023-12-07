@@ -95,7 +95,7 @@ def main():
                 st.session_state.tmp_file = tmp_file.name
                 workbook.save(tmp_file.name)
             
-            xl_model = formulas.ExcelModel().loads(tmp_file.name).finish()
+            xl_model = formulas.ExcelModel().loads(st.session_state.tmp_file).finish()
             xl_model.calculate()
             xl_model.write(dirpath='tmp')
             
