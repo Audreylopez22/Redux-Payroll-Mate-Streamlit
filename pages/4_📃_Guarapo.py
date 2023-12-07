@@ -48,7 +48,7 @@ def main():
             return
         
         st.warning(st.session_state.tmp_file)
-        st.warning(os.path.getsize(st.session_state.tmp_file))
+        """ st.warning(os.path.getsize(st.session_state.tmp_file)) """
         with open(st.session_state.tmp_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
 
