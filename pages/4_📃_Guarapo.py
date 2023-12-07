@@ -17,6 +17,7 @@ def filter_and_display_data(sheet):
     if sheet.title == "COMP MANAGEMENT":
         office_column_index = None
         header_row = sheet[1]
+        st.info("entra a la hoja")
         for idx, cell in enumerate(header_row, start=1):
             if cell.value == "Location":
                 office_column_index = idx
@@ -30,6 +31,8 @@ def filter_and_display_data(sheet):
             office = row[office_column_index - 1]
             if office == "Guarapo B/quilla Oficce":
                 data_list.append(row)
+        
+        st.write(data_list)
 
         if data_list:
             df = pd.DataFrame(data_list, columns=[cell.value for cell in header_row])
@@ -48,7 +51,6 @@ def main():
         st.warning(os.path.getsize(st.session_state.tmp_file))
         with open(st.session_state.tmp_file, "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
-            st.download_button("hola",file_content)
 
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
 
