@@ -14,7 +14,7 @@ st.sidebar.header("Guarapo")
 def filter_and_display_data(sheet):
     log_message(f"Filtering and displaying data for sheet: {sheet.title}")
 
-    if sheet.title == "Comp Management":
+    if sheet.title == "COMP MANAGEMENT":
         office_column_index = None
         header_row = sheet[1]
         for idx, cell in enumerate(header_row, start=1):
@@ -46,7 +46,8 @@ def main():
         
         st.warning(st.session_state.tmp_file)
         st.warning(os.path.getsize(st.session_state.tmp_file))
-        with open(st.session_state.tmp_file, "rb") as file_content:
+        st.warning(st.session_state.tmp_file.upper())
+        with open(st.session_state.tmp_file.upper(), "rb") as file_content:
             st.session_state.tmp_file_content = file_content.read() 
 
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
@@ -62,7 +63,7 @@ def main():
             files = os.listdir("/tmp")
             st.error(files)
             for file in files:
-                if file.endswith(".xlsx"):
+                if file.endswith(".xlsx", "XLSX"):
                     os.unlink(os.path.join(os.sep,"tmp",file))
             st.error(os.listdir("/tmp"))
 
