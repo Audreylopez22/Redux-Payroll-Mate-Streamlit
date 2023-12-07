@@ -40,18 +40,20 @@ def filter_and_display_data(sheet):
 
 
 def main():
-        
+        if 'tmp_file' not in st.session_state:
+            st.warning("Cannot display data because no file has been uploaded.")
+            return
         
         st.warning(st.session_state.tmp_file)
         st.warning(os.path.getsize(st.session_state.tmp_file))
+        directory, file_name = os.path.split(st.session_state.tmp_file)
+        file_name_uppercase = file_name.upper()
+        uppercased_file = os.path.join(directory, file_name_uppercase)
+        st.warning(uppercased_file)
         
         if os.path.exists("/tmp"):
-            directory, file_name = os.path.split(st.session_state.tmp_file)
-            file_name_uppercase = file_name.upper()
-            uppercased_file = os.path.join(directory, file_name_uppercase)
-            st.warning(uppercased_file)
             with open(uppercased_file, "rb") as file_content:
-                st.session_state.tmp_file_content = file_content.read() 
+                st.session_state.tmp_file_content = file_content.read()
             
         if 'tmp_file_content' not in st.session_state:
             st.warning("Cannot display data because no file has been uploaded.")
