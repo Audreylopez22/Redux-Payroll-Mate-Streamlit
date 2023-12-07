@@ -50,7 +50,7 @@ def main():
         uppercased_file = os.path.join(directory, file_name_uppercase)
         st.warning(uppercased_file)
         
-        if os.path.exists("/tmp"):
+        if os.path.exists(uppercased_file):
             with open(uppercased_file, "rb") as file_content:
                 st.session_state.tmp_file_content = file_content.read()
             
