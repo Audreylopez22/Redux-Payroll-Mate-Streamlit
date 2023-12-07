@@ -87,13 +87,13 @@ def main():
 
             st.success(f"Data exported to {file_path}")
         
-        if os.path.exists("/tmp"):
+        """ if os.path.exists("/tmp"):
             files = os.listdir("/tmp")
             st.error(files)
             for file in files:
                 if file.endswith(".xlsx"):
                     os.unlink(os.path.join(os.sep,"tmp",file))
-            st.error(os.listdir("/tmp"))
+            st.error(os.listdir("/tmp")) """
             
 if __name__ == "__main__":
     main()
