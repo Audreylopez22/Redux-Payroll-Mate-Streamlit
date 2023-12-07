@@ -55,20 +55,21 @@ def main():
         uploaded_file = io.BytesIO(st.session_state.tmp_file_content)
 
         workbook = load_workbook(uploaded_file)
+        
+        if st.button("Exportar Archivo Original a Excel"):
+            file_path = "uploaded_file.xlsx"
+
+            # Guardar el contenido del archivo original en un nuevo archivo Excel
+            with open(file_path, "wb") as original_file:
+                original_file.write(st.session_state.tmp_file_content)
+
+            st.success(f"Archivo original exportado como {file_path}")
 
         filtered_data = filter_and_display_data(workbook.active)
 
         st.write("Filtered Data:")
         st.write(filtered_data)
         
-        if os.path.exists("/tmp"):
-            files = os.listdir("/tmp")
-            st.error(files)
-            for file in files:
-                if file.endswith(".xlsx"):
-                    os.unlink(os.path.join(os.sep,"tmp",file))
-            st.error(os.listdir("/tmp"))
-
         if st.button("Export to Excel"):
             file_path = "filtered_data.xlsx"
 
@@ -86,6 +87,13 @@ def main():
 
             st.success(f"Data exported to {file_path}")
         
+        if os.path.exists("/tmp"):
+            files = os.listdir("/tmp")
+            st.error(files)
+            for file in files:
+                if file.endswith(".xlsx"):
+                    os.unlink(os.path.join(os.sep,"tmp",file))
+            st.error(os.listdir("/tmp"))
             
 if __name__ == "__main__":
     main()
