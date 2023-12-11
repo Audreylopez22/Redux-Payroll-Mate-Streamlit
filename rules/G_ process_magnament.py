@@ -27,20 +27,19 @@ def process_magnament(sheet):
             S = get_column_letter(sheet['S'][0].column)
             N = get_column_letter(sheet['N'][0].column)
             O = get_column_letter(sheet['O'][0].column)
-            L = get_column_letter(sheet['S'][0].column)
+            L = get_column_letter(sheet['L'][0].column)
             U = get_column_letter(sheet['U'][0].column)
             W = get_column_letter(sheet['W'][0].column)
             H = get_column_letter(sheet['H'][0].column)
             X = get_column_letter(sheet['X'][0].column)
             Z = get_column_letter(sheet['Z'][0].column)
             
-            
             # Calculate Non cash out benefits
-            sheet[f'T{row}'].value = f'={Q}{row}+{S}{row}'
+            sheet[f'T{row}'].value = f'={S}{row}'
             sheet[f'T{row}'].style = money_style
             
             # Designated Cash out benefits 
-            sheet[f'U{row}'].value = f'={N}{row}+{O}{row}+{L}{row}'
+            sheet[f'U{row}'].value = f'={N}{row}+{O}{row}+{L}{row}+{Q}{row}'
             sheet[f'U{row}'].style = money_style
              
             # On goin 
@@ -54,7 +53,6 @@ def process_magnament(sheet):
             # Total 
             sheet[f'AA{row}'].value = f'={X}{row}+ {Z}{row}'
             sheet[f'AA{row}'].style = money_style           
-
             
         return sheet
     
