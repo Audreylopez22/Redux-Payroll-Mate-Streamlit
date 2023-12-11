@@ -90,7 +90,7 @@ def main():
             workbook.save(modified_file)
             
             #to display the data in the guarapo tab it is necessary to physically save the 
-            # calculated data and it is saved in the files folder. 
+            # calculated data and it is saved in the tmp folder. 
             with NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp_file:
                 st.session_state.tmp_file = tmp_file.name
                 workbook.save(tmp_file.name)
