@@ -3,10 +3,10 @@ import streamlit as st
 import pandas as pd
 
 def simple_sheet_values(workbook):
-    log_message("processing simple sheet'")
     
     # Select Sheets
     if "Simple Sheet" in workbook.sheetnames:
+        log_message("processing simple sheet'")
         comp_management_sheet = workbook["Comp Management"]
         simple_sheet = workbook["Simple Sheet"]
         

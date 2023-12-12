@@ -18,10 +18,10 @@ def get_or_create_money_style(workbook):
     return money_style
 
 def assign_bonuses(workbook):
-    log_message("Assigning bonuses from 'bonus sheet' to 'Comp Management'")
     
     # Select Sheets
     if "Bonus Sheet" in workbook.sheetnames:
+        log_message("Assigning bonuses from 'bonus sheet' to 'Comp Management'")
         bonus_sheet = workbook["Bonus Sheet"]
         comp_management_sheet = workbook["Comp Management"]
         

@@ -11,11 +11,12 @@ def find_row_index_by_name(sheet, name_to_find, name_column_index):
     return None
 
 def new_employee_alert(sheet):
-    log_message(f"checking for new employees this month for sheet: {sheet.title}")
-
+    
     if sheet.title != "Comp Management":
         return
-
+    
+    log_message(f"checking for inactive people this month for sheet: {sheet.title}")
+    
     # get the column status
     status_column_index = None
     header_row = sheet[1]

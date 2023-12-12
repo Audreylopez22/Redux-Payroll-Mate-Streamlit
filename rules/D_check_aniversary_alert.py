@@ -12,10 +12,11 @@ def find_row_index_by_name(sheet, name_to_find, name_column_index):
     return None
 
 def check_aniversary_alert(sheet):
-    log_message(f"Checking aniversary alert for sheet: {sheet.title}")
 
     if sheet.title != "Comp Management":
         return
+    
+    log_message(f"Checking aniversary alert for sheet: {sheet.title}")
 
     hire_date_column_index = None
     name_column_index = None
