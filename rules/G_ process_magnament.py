@@ -34,6 +34,7 @@ def process_magnament(sheet):
             X = get_column_letter(sheet['X'][0].column)
             Z = get_column_letter(sheet['Z'][0].column)
             
+            
             # Calculate Non cash out benefits
             sheet[f'T{row}'].value = f'={S}{row}'
             sheet[f'T{row}'].style = money_style
@@ -53,6 +54,7 @@ def process_magnament(sheet):
             # Total 
             sheet[f'AA{row}'].value = f'={X}{row}+ {Z}{row}'
             sheet[f'AA{row}'].style = money_style           
+
             
         return sheet
     

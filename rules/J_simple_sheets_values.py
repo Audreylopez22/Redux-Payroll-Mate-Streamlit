@@ -6,7 +6,7 @@ def simple_sheet_values(workbook):
     
     # Select Sheets
     if "Simple Sheet" in workbook.sheetnames:
-        log_message("processing simple sheet'")
+        log_message("processing simple sheet")
         comp_management_sheet = workbook["Comp Management"]
         simple_sheet = workbook["Simple Sheet"]
         
@@ -31,10 +31,10 @@ def simple_sheet_values(workbook):
     return workbook
 
 def main(workbook, progress_bar):
-    for sheet in workbook:
-        simple_sheet_values(workbook)
+    
+    simple_sheet_values(workbook)
     
     if progress_bar is not None:
-        progress_bar.progress(1.0 / len(sheet.parent.sheetnames))   
+        progress_bar.progress(1.0)   
 
     return workbook

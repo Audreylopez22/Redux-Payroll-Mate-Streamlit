@@ -109,21 +109,18 @@ def process_guarapo(sheet):
 
 
 def main(workbook, progress_bar):
-    for sheet in workbook:
-        create_guarapo(workbook)
-        filter_and_display_data(sheet) 
+
+    create_guarapo(workbook)
+    filter_and_display_data(workbook["Comp Management"]) 
         
-        if "Comp Management" == sheet.title:
-            print(f"Filtered Data for sheet '{sheet.title}':")
-            print(sheet.parent["Guarapo"].iter_rows(values_only=True))
-        else:
-            print(f"No data matching the criteria for sheet '{sheet.title}'.")
+    if "Comp Management" == workbook["Comp Management"]:
+        print(f"Filtered Data for sheet 'Comp Management':")
+        print(workbook["Guarapo"].iter_rows(values_only=True))
             
-    for sheet in workbook:
-        process_guarapo(sheet)
+    process_guarapo(workbook["Guarapo"])
         
     
     if progress_bar is not None:
-        progress_bar.progress(1.0 / len(sheet.parent.sheetnames))   
+        progress_bar.progress(1.0)   
 
     return workbook

@@ -49,10 +49,9 @@ def process_simple_sheet(sheet):
 
 def main(workbook, progress_bar):
     
-    for sheet in workbook:
-        process_simple_sheet(sheet)
+    process_simple_sheet(workbook["Simple Sheet"])
     
     if progress_bar is not None:
-        progress_bar.progress(1.0 / len(sheet.parent.sheetnames))   
+        progress_bar.progress(1.0)   
 
     return workbook

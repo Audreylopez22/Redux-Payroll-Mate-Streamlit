@@ -9,7 +9,8 @@ def main(workbook, progress_bar):
         
         if progress_bar is not None:
             progress_bar.progress(1.0 / len(workbook.sheetnames))
-            
+        
+        
     else:
         log_message("The document does not have the required sheets")
 
