@@ -4,7 +4,7 @@ from io import BytesIO
 import datetime
 import os
 import importlib
-#import formulas
+import formulas
 from tempfile import NamedTemporaryFile
 
 st.set_page_config(page_title="Load Sheet", page_icon="📈",layout="wide")
@@ -61,7 +61,7 @@ def main():
         st.session_state.errors = []
         st.session_state.info = []
         st.session_state.logs = []
-        #st.session_state.tmp_file = ""
+        st.session_state.tmp_file = ""
         uploaded_file_contents = uploaded_file.read()
         
         if 'file_hash' not in st.session_state or st.session_state.file_hash != hash(uploaded_file_contents):
@@ -82,11 +82,23 @@ def main():
             log_message("Making modifications to the Excel file...")
                 
             workbook = process_rules(workbook, progress_bar)
-
+            
+            
             # the modified or processed file is saved in memory
             modified_file = BytesIO()
             log_message("Saving modifications to the Excel file...")
             workbook.save(modified_file)
+            
+            #to display the data in the guarapo tab it is necessary to physically save the 
+            # calculated data and it is saved in the tmp folder. 
+            with NamedTemporaryFile(delete=False, suffix=".xlsx") as tmp_file:
+                st.session_state.tmp_file = tmp_file.name
+                workbook.save(tmp_file.name)
+            
+            xl_model = formulas.ExcelModel().loads(st.session_state.tmp_file).finish()
+            xl_model.calculate()
+            log_message("The changes were made in the Excel file for the 'guarapo' sheet.")
+            xl_model.write(dirpath='/tmp')
             
             # download button for the downloaded file that is in memory
             st.session_state.download_button = st.download_button(

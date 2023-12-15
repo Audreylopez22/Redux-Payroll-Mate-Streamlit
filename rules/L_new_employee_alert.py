@@ -12,11 +12,13 @@ def find_row_index_by_name(sheet, name_to_find, name_column_index):
     return None
 
 def new_employee_alert(sheet):
+    
 
     if sheet.title != "Comp Management":
         return
 
     log_message(f"checking for new employees this month for sheet: {sheet.title}")
+    
     # Obtain the column of the date they entered the company
     hire_date_column_index = None
     header_row = sheet[1]
@@ -54,7 +56,6 @@ def new_employee_alert(sheet):
 def main(workbook,progress_bar):
     for sheet in workbook:
         new_employee_alert(sheet)
-        
     if progress_bar is not None:
         progress_bar.progress(1.0 / len(sheet.parent.sheetnames))
 

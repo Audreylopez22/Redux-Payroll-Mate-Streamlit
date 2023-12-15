@@ -14,12 +14,11 @@ def find_row_index_by_name(sheet, name_to_find):
 
 
 def check_birthday_alert(sheet):
-    
+    log_message(f"Checking birthday alert for sheet: {sheet.title}")
 
     if sheet.title != "Comp Management":
         return
 
-    log_message(f"Checking birthday alert for sheet: {sheet.title}")
     birth_date_column_index = None
     header_row = sheet[1]
     for idx, cell in enumerate(header_row, start=1):

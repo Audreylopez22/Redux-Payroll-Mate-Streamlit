@@ -4,8 +4,9 @@ from openpyxl.styles import PatternFill
 
 def create_simple_sheet(workbook):
 
+   log_message("creating simple sheet")
+   
    if "Simple Sheet" not in workbook.sheetnames:
-        log_message("creating simple sheet")
         simple_sheet = workbook.create_sheet("Simple Sheet")
 
         new_columns = ["Last name, First name", "Base Salary", "On Going Reimbursements", 
@@ -16,10 +17,10 @@ def create_simple_sheet(workbook):
             simple_sheet[f"{new_column_letter}1"] = column_name
 
 def main(workbook, progress_bar):
-
-    create_simple_sheet(workbook)
+    for sheet in workbook:
+        create_simple_sheet(workbook)
     
     if progress_bar is not None:
-        progress_bar.progress(1.0 )   
+        progress_bar.progress(1.0 / len(sheet.parent.sheetnames))   
 
     return workbook

@@ -17,8 +17,7 @@ def get_or_create_money_style(workbook):
     return money_style
 
 def process_magnament(sheet):
-    target_sheets = {"Comp Management", "Guarapo"}
-    if sheet.title in target_sheets:
+    if sheet.title == "Comp Management":
         last_row= sheet.max_row
         
         money_style = get_or_create_money_style(sheet.parent)
@@ -34,7 +33,6 @@ def process_magnament(sheet):
             H = get_column_letter(sheet['H'][0].column)
             X = get_column_letter(sheet['X'][0].column)
             Z = get_column_letter(sheet['Z'][0].column)
-            
             
             # Calculate Non cash out benefits
             sheet[f'T{row}'].value = f'={S}{row}'
@@ -55,7 +53,6 @@ def process_magnament(sheet):
             # Total 
             sheet[f'AA{row}'].value = f'={X}{row}+ {Z}{row}'
             sheet[f'AA{row}'].style = money_style           
-
             
         return sheet
     
