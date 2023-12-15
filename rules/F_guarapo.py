@@ -41,7 +41,7 @@ def filter_and_display_data(sheet):
             return
 
         data_list = []
-        for row in sheet.iter_rows(min_row=2, max_col=27, values_only=True): 
+        for row in sheet.iter_rows(min_row=2, max_col=19, values_only=True): 
             office = row[office_column_index - 1]
             if office == "Guarapo B/quilla Oficce":
                 data_list.append(row)
