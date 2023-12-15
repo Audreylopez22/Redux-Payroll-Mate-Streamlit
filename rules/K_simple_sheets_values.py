@@ -15,9 +15,9 @@ def simple_sheet_values(workbook):
         for row in range (2, comp_management_sheet.max_row + 1):
             name = comp_management_sheet.cell(row=row, column=1).value
             base_salary = comp_management_sheet.cell(row=row, column=8).value
-            on_going_reimbursements=comp_management_sheet.cell(row=row, column=23).value
+            on_going_reimbursements = f"='Comp Management'!W{row}"
             sub_total=comp_management_sheet.cell(row=row, column=24).value
-            comments=comp_management_sheet.cell(row=row, column=25).value
+            comments= f"='Comp Management'!Y{row}"
             bonus=comp_management_sheet.cell(row=row, column=26).value
             total=comp_management_sheet.cell(row=row, column=27).value
             

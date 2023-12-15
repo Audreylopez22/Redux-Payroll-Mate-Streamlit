@@ -17,7 +17,8 @@ def get_or_create_money_style(workbook):
     return money_style
 
 def process_magnament(sheet):
-    if sheet.title == "Comp Management":
+    target_sheets = {"Comp Management", "Guarapo"}
+    if sheet.title in target_sheets:
         last_row= sheet.max_row
         
         money_style = get_or_create_money_style(sheet.parent)

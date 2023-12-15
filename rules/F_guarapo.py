@@ -20,11 +20,7 @@ def create_guarapo(workbook):
                                                 "A Cloud Guru 2023 Effective date",
                                                 "A Cloud Guru 2023 Company pays", 
                                                 "Accounting Advise Status",
-                                                "Accounting Advise Company pays",
-                                                "Non cash out benefits", 
-                                                "Designated Cash out benefits",
-                                                "Prorating","On Going Reimbursements", 
-                                                "Sub Total","Comments","Bonus/Additional", "Total"]
+                                                "Accounting Advise Company pays"]
 
         for i, column_name in enumerate(new_columns, start=1):
             new_column_letter = get_column_letter(i)
@@ -63,51 +59,6 @@ def apply_money_style_to_range(sheet, start_col, end_col, money_style):
             cell = sheet.cell(row=row, column=col)
             cell.style = money_style
 
-def process_guarapo(sheet):
-    if sheet.title == "Guarapo":
-        last_row= sheet.max_row
-        
-        money_style = get_or_create_money_style(sheet.parent)
-        apply_money_style_to_range(sheet, 16, 27, money_style)
-            
-        for row in range (2, last_row +1):
-            Q = 'Q'
-            S = 'S'
-            N = 'N'
-            O = 'O'
-            L = 'L'
-            U = 'U'
-            W = 'W'
-            H = 'H'
-            X = 'X'
-            Z = 'Z'
-
-            # Calculate Non cash out benefits
-            sheet[f'T{row}'].value = f'={S}{row}'
-            sheet[f'T{row}'].style = money_style
-            
-            # Designated Cash out benefits 
-            sheet[f'U{row}'].value = f'={N}{row}+{O}{row}+{L}{row}+{Q}{row}'
-            sheet[f'U{row}'].style = money_style
-             
-            # On goin 
-            sheet[f'W{row}'].value = f'={U}{row}'
-            sheet[f'W{row}'].style = money_style
-
-            # Sub Total
-            sheet[f'X{row}'].value = f'={W}{row}+{H}{row}'
-            sheet[f'X{row}'].style = money_style
-            
-            # Total 
-            sheet[f'AA{row}'].value = f'={X}{row}+ {Z}{row}'
-            sheet[f'AA{row}'].style = money_style           
-
-            
-        return sheet
-    
-    return sheet
-
-
 def main(workbook, progress_bar):
 
     create_guarapo(workbook)
@@ -116,8 +67,6 @@ def main(workbook, progress_bar):
     if "Comp Management" == workbook["Comp Management"]:
         print(f"Filtered Data for sheet 'Comp Management':")
         print(workbook["Guarapo"].iter_rows(values_only=True))
-            
-    process_guarapo(workbook["Guarapo"])
         
     
     if progress_bar is not None:
