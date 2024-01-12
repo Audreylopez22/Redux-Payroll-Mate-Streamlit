@@ -15,6 +15,8 @@ with open('./config.yaml', 'r') as file:
 for username, user in config['credentials']['usernames'].items():
         user['password'] = st.secrets.paswords[username]
         user['email'] = st.secrets.emails[username]
+        st.write("username")
+        st.write(username)
         
 def main():
 
@@ -25,11 +27,17 @@ def main():
                 config['cookie']['expiry_days'],
                 config['preauthorized']
         )
-        
+        st.write("config credentials")
+        st.write(config['credentials'])
         
         
         name, authentication_status, username = authenticator.login('Login', 'main')
-        
+        st.write("name")
+        st.write(name)
+        st.write("authentication_status")
+        st.write(authentication_status)
+        st.write("username ")
+        st.write(username)
         if st.session_state["authentication_status"]:
                 st.write(f'Welcome *{st.session_state["name"]}*')
                 authenticator.logout('Logout', 'main')
