@@ -32,15 +32,17 @@ def main():
         st.write("config")
         st.write(config)
         
+        try:
         
-        
-        name, authentication_status, username = authenticator.login('Login', 'main')
-        st.write("name")
-        st.write(name)
-        st.write("authentication_status")
-        st.write(authentication_status)
-        st.write("username ")
-        st.write(username)
+                name, authentication_status, username = authenticator.login('Login', 'main')
+                st.write("name")
+                st.write(name)
+                st.write("authentication_status")
+                st.write(authentication_status)
+                st.write("username ")
+                st.write(username)
+        except Exception as e:
+                st.error(e)
         
         if st.session_state["authentication_status"]:
                 st.write(f'Welcome *{st.session_state["name"]}*')
