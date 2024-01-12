@@ -4,10 +4,13 @@ from io import BytesIO
 import datetime
 import os
 import importlib
-#import formulas
-from tempfile import NamedTemporaryFile
 
 st.set_page_config(page_title="Load Sheet", page_icon="📈",layout="wide")
+
+if 'authentication_status' not in st.session_state or st.session_state.authentication_status is None:
+    st.warning("You must login to access this page.")
+    st.markdown(f'<meta http-equiv="refresh" content="0;url={st.secrets.urls.login}">', unsafe_allow_html=True)
+    st.stop() 
 
 st.markdown("# Welcome to the Excel file processing application!")
 st.sidebar.header("Welcome to the Excel file processing application! ")
@@ -61,7 +64,6 @@ def main():
         st.session_state.errors = []
         st.session_state.info = []
         st.session_state.logs = []
-        #st.session_state.tmp_file = ""
         uploaded_file_contents = uploaded_file.read()
         
         if 'file_hash' not in st.session_state or st.session_state.file_hash != hash(uploaded_file_contents):

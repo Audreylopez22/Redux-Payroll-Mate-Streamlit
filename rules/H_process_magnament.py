@@ -37,11 +37,11 @@ def process_magnament(sheet):
             
             
             # Calculate Non cash out benefits
-            sheet[f'T{row}'].value = f'={S}{row}'
+            sheet[f'T{row}'].value = f'={S}{row}+{Q}{row}'
             sheet[f'T{row}'].style = money_style
             
             # Designated Cash out benefits 
-            sheet[f'U{row}'].value = f'={N}{row}+{O}{row}+{L}{row}+{Q}{row}'
+            sheet[f'U{row}'].value = f'={N}{row}+{O}{row}+{L}{row}'
             sheet[f'U{row}'].style = money_style
              
             # On goin 

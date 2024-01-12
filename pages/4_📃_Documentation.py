@@ -1,15 +1,19 @@
 import streamlit as st
 
-
 st.set_page_config(
     page_title="Home",
     page_icon="👋",
     layout="wide"
 )
 
+if 'authentication_status' not in st.session_state or st.session_state.authentication_status is None:
+    st.warning("You must login to access this page.")
+    st.markdown(f'<meta http-equiv="refresh" content="0;url={st.secrets.urls.login}">', unsafe_allow_html=True)
+    st.stop() 
 
 def main():
     st.title("Welcome to the Payroll File Processing Tool")
+    
      # Introduction
     st.header("Introduction")
     st.write("The Excel file processing application is a tool designed to streamline the"+
@@ -69,17 +73,6 @@ def main():
     # Page 3: Country Payroll
     st.header("Page 3: Country Payroll")
     st.write("This page features two graphs representing the number of employees per country.")
-
-    # Page 4: Documentation
-    st.header("Page 4: Guarapo")
-    st.write("In this tab, you will find all the filtered information about the personnel"
-             +" belonging to the 'Guarapo B/quilla Office.' It includes:")
-    st.write("1. A table containing comprehensive information about the personnel working in this office.")
-    st.write("2. An option that allows you to export the presented table to Excel format; simply" +
-             " click on the 'Export to Excel' button.")
-    st.write("3. Finally, this will enable a button labeled 'Download Excel File',"+
-             " which allows you to download the file in .xlsx format directly.")
-
 
     # Results Visualization
     st.subheader("Results Visualization:")

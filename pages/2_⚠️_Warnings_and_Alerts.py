@@ -1,7 +1,12 @@
 import streamlit as st
 
-
 st.set_page_config(page_title="Warning and alerts", page_icon="⚠",layout="wide")
+
+if 'authentication_status' not in st.session_state or st.session_state.authentication_status is None:
+    st.warning("You must login to access this page.") 
+    st.markdown(f'<meta http-equiv="refresh" content="0;url={st.secrets.urls.login}">', unsafe_allow_html=True)
+    st.stop() 
+    
 
 st.markdown("#  Warnings and alerts")
 st.sidebar.header("Warnings and alerts")
