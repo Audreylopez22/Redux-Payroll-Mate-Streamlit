@@ -29,6 +29,9 @@ def main():
         )
         st.write("config credentials")
         st.write(config['credentials'])
+        st.write("config")
+        st.write(config)
+        
         
         
         name, authentication_status, username = authenticator.login('Login', 'main')
@@ -38,6 +41,7 @@ def main():
         st.write(authentication_status)
         st.write("username ")
         st.write(username)
+        
         if st.session_state["authentication_status"]:
                 st.write(f'Welcome *{st.session_state["name"]}*')
                 authenticator.logout('Logout', 'main')
