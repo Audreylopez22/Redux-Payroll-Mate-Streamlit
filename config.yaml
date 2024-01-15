@@ -1,17 +1,8 @@
-cookie:
-  expiry_days: 0.002
-  key: nomina
-  name: nomina_key
 credentials:
-  usernames:
-    audrey:
-      email: 
-      name: Audrey Lopez
-      password: 
-    william:
-      email: 
-      name: William Vargas
-      password: null
-preauthorized:
-  emails:
-  - Nomina@gmail.com
+  names: ['Audrey Lopez', 'William Vargas']
+  usernames: ['audrey', 'william']
+  passwords: ['', ''] 
+cookie:
+  name: nomina
+  key:  nomina_key
+  expiry_days: 0.002
