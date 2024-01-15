@@ -20,11 +20,12 @@ for i, username in enumerate(config['credentials']['usernames']):
 def main():
 
         authenticator = stauth.Authenticate(
-                config['credentials'],
+                config['credentials']['names'],
+                config['credentials']['usernames'],
+                config['credentials']['passwords'],
                 config['cookie']['name'],
                 config['cookie']['key'],
-                config['cookie']['expiry_days'],
-                config['preauthorized']
+                config['cookie']['expiry_days']
         )
         st.write("config credentials")
         st.write(config['credentials'])
