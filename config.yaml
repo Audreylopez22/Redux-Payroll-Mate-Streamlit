@@ -1,7 +1,7 @@
 credentials:
-  names: ['Audrey Lopez', 'William Vargas']
-  usernames: ['audrey', 'william']
-  passwords: ['', ''] 
+  names: ['Audrey Lopez', 'William Vargas',"Joan Romero"]
+  usernames: ['audrey', 'william',"joan"]
+  passwords: ['', '',''] 
 cookie:
   name: nomina
   key:  nomina_key

@@ -6,7 +6,7 @@ import plotly.express as px
 st.set_page_config(page_title="Country Payroll", page_icon="🌍",layout="wide")
 
 # Verificar si la cookie "nomina_key" está presente
-if 'authentication_status' not in st.session_state or st.session_state.authentication_status is None:
+if 'authentication_status' not in st.session_state or st.session_state.authentication_status is None or st.session_state.authentication_status is False:
     st.warning("You must login to access this page.")
     st.markdown(f'<meta http-equiv="refresh" content="0;url={st.secrets.urls.login}">', unsafe_allow_html=True)
     st.stop() 
