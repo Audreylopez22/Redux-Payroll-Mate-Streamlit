@@ -10,7 +10,6 @@ with open("./config.yaml", "r") as file:
 
 for i, username in enumerate(config["credentials"]["usernames"]):
     config["credentials"]["passwords"][i] = st.secrets.paswords[username]
-    st.write("username")
 
 
 def main():
