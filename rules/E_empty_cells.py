@@ -1,20 +1,23 @@
 from tools import log_message
-import streamlit as st 
+import streamlit as st
 from openpyxl.styles import PatternFill
 
+
 def find_row_index_by_name(sheet, name_to_find, name_column_index):
-    for row_index,row in enumerate(sheet.iter_rows(min_row=2, max_col=name_column_index,
-                                                values_only=True), start=2):
+    for row_index, row in enumerate(
+        sheet.iter_rows(min_row=2, max_col=name_column_index, values_only=True), start=2
+    ):
         if row[0] == name_to_find:
             return row_index
     return None
 
+
 def empty_cells(sheet):
     log_message(f"Checking empty cells for sheet: {sheet.title}")
-    
+
     max_row = sheet.max_row
     max_col = 10
-    
+
     empty_first_column_row = None
     for row in range(1, max_row + 1):
         if sheet.cell(row=row, column=1).value is None:
@@ -23,35 +26,41 @@ def empty_cells(sheet):
 
     if empty_first_column_row is not None:
         max_row = empty_first_column_row - 1
-        
+
     columns = [sheet.cell(row=1, column=col).value for col in range(1, max_col + 1)]
     empty_cells = {}
-    
+
     fill = PatternFill(start_color="FFcc8888", end_color="FFcc8888", fill_type="solid")
 
     for col in range(1, max_col + 1):
         actual_column = columns[col - 1]
         empty_cells_persons = []
-        
+
         for row in range(1, max_row + 1):
             if sheet.title == "Bonus Sheet" and sheet.cell(row=row, column=col).value is None:
                 empty_cells_persons.append(sheet.cell(row=row, column=1).value)
-                sheet.cell(row=row, column=col).fill = fill  
+                sheet.cell(row=row, column=col).fill = fill
             elif sheet.cell(row=row, column=col).value is None:
                 empty_cells_persons.append(sheet.cell(row=row, column=1).value)
-                sheet.cell(row=row, column=col).fill = fill 
-        
+                sheet.cell(row=row, column=col).fill = fill
+
         if empty_cells_persons:
             empty_cells[actual_column] = empty_cells_persons
 
     if empty_cells:
-        formatted_list = "\n".join([f"- Column {col}, people without information: {' ; '.join(persons)}" for col, persons in empty_cells.items()])
+        formatted_list = "\n".join(
+            [
+                f"- Column {col}, people without information: {' ; '.join(persons)}"
+                for col, persons in empty_cells.items()
+            ]
+        )
         st.session_state.errors.append(f"Empty cells in sheet '{sheet.title}': \n{formatted_list}")
-        
+
     else:
         log_message(f"No empty cells found in sheet '{sheet.title}'.")
 
-def main(workbook,progress_bar):
+
+def main(workbook, progress_bar):
     for sheet in workbook:
         empty_cells(sheet)
     if progress_bar is not None:

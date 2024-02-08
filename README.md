@@ -2,8 +2,6 @@
 
 **Table of Contents**
 
-[TOC]
-
 #Introduction
 The Excel file processing application is a tool designed to streamline the manipulation of data contained in Excel files. It utilizes Streamlit for the user interface and Openpyxl for data processing.
 

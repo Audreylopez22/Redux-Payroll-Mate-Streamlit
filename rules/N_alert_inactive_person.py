@@ -1,18 +1,18 @@
-
 from tools import log_message
-from tools import get_or_create_money_style
 import streamlit as st
 from openpyxl.styles import PatternFill
 
+
 def find_row_index_by_name(sheet, name_to_find, name_column_index):
-    for row_index,row in enumerate(sheet.iter_rows(min_row=2, max_col=name_column_index,
-                                                values_only=True), start=2):
+    for row_index, row in enumerate(
+        sheet.iter_rows(min_row=2, max_col=name_column_index, values_only=True), start=2
+    ):
         if row[0] == name_to_find:
             return row_index
     return None
 
-def new_employee_alert(sheet):
 
+def new_employee_alert(sheet):
     if sheet.title != "Comp Management":
         return
     log_message(f"checking inactive people this month for sheet: {sheet.title}")
@@ -24,35 +24,39 @@ def new_employee_alert(sheet):
             status_column_index = idx
             break
 
-    if  status_column_index is None:
+    if status_column_index is None:
         st.error("No 'Status' column found.")
         return
 
     # Get a list of people who are inactive
     status_inactive = "Inactive"
     status_people = []
-    
+
     for row in sheet.iter_rows(min_row=2, max_col=status_column_index, values_only=True):
         status_column = row[status_column_index - 1]
         if isinstance(status_column, str) and status_column.lower() == status_inactive.lower():
-            status_people.append(row[0]) 
+            status_people.append(row[0])
             name_to_find = row[0]
-            
+
             row_index = find_row_index_by_name(sheet, name_to_find, status_column_index)
 
             if row_index is not None:
-                cell = sheet.cell(row=row_index, column= status_column_index)
-                cell.fill = PatternFill(start_color="FFfee599", end_color="FFfee599", fill_type="solid")
-
+                cell = sheet.cell(row=row_index, column=status_column_index)
+                cell.fill = PatternFill(
+                    start_color="FFfee599", end_color="FFfee599", fill_type="solid"
+                )
 
     if status_people:
         formatted_list = "\n".join([f"- {person}" for person in status_people])
-        st.session_state.alerts.append(f"Inactive employees in sheet '{sheet.title}': \n{formatted_list}")
+        st.session_state.alerts.append(
+            f"Inactive employees in sheet '{sheet.title}': \n{formatted_list}"
+        )
 
     else:
-        st.session_state.info.append(f"No inactive employees were found in the current month.")
-            
-def main(workbook,progress_bar):
+        st.session_state.info.append("No inactive employees were found in the current month.")
+
+
+def main(workbook, progress_bar):
     for sheet in workbook:
         new_employee_alert(sheet)
     if progress_bar is not None:
