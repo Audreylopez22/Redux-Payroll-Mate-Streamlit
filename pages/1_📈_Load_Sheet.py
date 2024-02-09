@@ -2,7 +2,6 @@ import streamlit as st
 import openpyxl
 from io import BytesIO
 import datetime
-import os
 import importlib
 
 st.set_page_config(page_title="Load Sheet", page_icon="📈", layout="wide")
@@ -19,8 +18,10 @@ if (
     )
     st.stop()
 
-st.markdown("# Welcome to the Excel file processing application!")
-st.sidebar.header("Welcome to the Excel file processing application! ")
+title = "Welcome to the Excel file processing application!"
+st.markdown(f"# {title}")
+st.sidebar.header(title)
+
 st.write(
     """Here, you can upload your Excel file to perform various operations. Start by selecting your
     file via the 'Load an Excel file' button. The application will automatically check whether the
@@ -44,24 +45,38 @@ def log_message(message):
 
 
 def process_rules(workbook, progress_bar):
-    rule_files = [
-        filename
-        for filename in os.listdir("rules")
-        if filename.endswith(".py") and filename not in ["__init__.py"]
-    ]
-    total_steps = len(rule_files)
-    sorted_files = sorted(rule_files)
+    try:
+        # TERMINAR DE HACER ESTO
+        rule_files = [
+            "A_check_sheets.py",
+            "B_validate_sheet.py",
+            "C_check_birthday_alert.py",
+            "D_check_aniversary_alert.py",
+            "E_empty_cells.py",
+            "F_guarapo.py",
+            "G_add_columns_management.py",
+            "H_process_magnament.py",
+            "I_create_simple_sheet.py",
+            "J_bonus.py",
+            "K_simple_sheets_values.py",
+            "L_process_simple_sheet.py",
+            "M_new_employee_alert.py",
+            "N_alert_inactive_person.py",
+        ]
+        total_steps = len(rule_files)
 
-    for i, filename in enumerate(sorted_files):
-        if filename.endswith(".py") and filename not in ["__init__.py"]:
+        for i, filename in enumerate(rule_files):
             rule_module_name = f"rules.{filename[:-3]}"
             rule = importlib.import_module(rule_module_name)
             if hasattr(rule, "main") and callable(rule.main):
                 workbook = rule.main(workbook, progress_bar)
 
-        # For the progres bar
-        progress_percentage = min(1.0, (i + 1) / total_steps)
-        progress_bar.progress(progress_percentage)
+            # For the progres bar
+            progress_percentage = min(1.0, (i + 1) / total_steps)
+            progress_bar.progress(progress_percentage)
+
+    except Exception as error:
+        print(error)
 
     return workbook
 

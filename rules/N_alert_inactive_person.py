@@ -1,15 +1,6 @@
-from tools import log_message
+from tools import log_message, find_row_index_by_name
 import streamlit as st
 from openpyxl.styles import PatternFill
-
-
-def find_row_index_by_name(sheet, name_to_find, name_column_index):
-    for row_index, row in enumerate(
-        sheet.iter_rows(min_row=2, max_col=name_column_index, values_only=True), start=2
-    ):
-        if row[0] == name_to_find:
-            return row_index
-    return None
 
 
 def new_employee_alert(sheet):

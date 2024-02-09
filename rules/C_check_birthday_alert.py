@@ -54,7 +54,7 @@ def check_birthday_alert(sheet):
         )
 
     else:
-        st.warning("No birthdays in the current month'.")
+        st.session_state.alerts.append("No birthdays in the current month.")
 
 
 def main(workbook, progress_bar):

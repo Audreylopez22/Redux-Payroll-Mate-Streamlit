@@ -1,25 +1,9 @@
-from tools import log_message
-from openpyxl.styles import NamedStyle
-
-
-def get_or_create_money_style(workbook):
-    money_style_name = "money"
-
-    # # Check if the 'money' style already exists
-    for style in workbook._named_styles:
-        if style.name == money_style_name:
-            return style
-
-    #  If it does not exist, create and add the style 'money'.
-    money_style = NamedStyle(name=money_style_name, number_format='"$"#,##0.00')
-    workbook.add_named_style(money_style)
-
-    return money_style
+from tools import log_message, get_or_create_money_style
 
 
 def assign_bonuses(workbook):
     log_message("Assigning bonuses from 'bonus sheet' to 'Comp Management'")
-
+    money_style = get_or_create_money_style(workbook)
     # Select Sheets
     if "Bonus Sheet" in workbook.sheetnames:
         bonus_sheet = workbook["Bonus Sheet"]

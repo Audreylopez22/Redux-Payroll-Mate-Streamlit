@@ -15,8 +15,9 @@ if (
     st.stop()
 
 
-st.markdown("#  Warnings and alerts")
-st.sidebar.header("Warnings and alerts")
+title = "Warnings and alerts"
+st.markdown(f"# {title}")
+st.sidebar.header(title)
 
 if not any(key in st.session_state for key in ["errors", "alerts", "info"]):
     st.warning("No data loaded. Please upload an Excel file on the load page.")
