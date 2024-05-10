@@ -1,3 +1,4 @@
+import sys
 import streamlit as st
 
 st.set_page_config(page_title="Home", page_icon="👋", layout="wide")
@@ -17,7 +18,7 @@ if (
 
 def main():
     st.title("Welcome to the Payroll File Processing Tool")
-
+    st.write("Python Version: ", sys.version)
     # Introduction
     st.header("Introduction")
     st.write(

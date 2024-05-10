@@ -37,5 +37,14 @@ This application requires the following libraries in the following versions to o
 
 It is crucial to note that version 0.1.5 of streamlit-authenticator should be used, as an issue with authentication has been identified when using the latest version (version="0.2.3") in the online application. In the event of considering a future update, it is recommended to test the new version beforehand to ensure that any issues associated with the latest version have been resolved.
 
+#Docker prerequisites
+NodeJS: 19.6.0
+
+#Create Docker containers on Windows
+
+Run the following commands in PowerShell from the root of the repository.
+
+`$Env:DATE=$(get-date -Format "yyyyMMdd")`
+`docker compose -f docker/docker-compose.yml --project-directory $(pwd) up -d`
 
 ###End
