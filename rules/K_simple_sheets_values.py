@@ -14,7 +14,7 @@ def simple_sheet_values(workbook):
             name = comp_management_sheet.cell(row=row, column=1).value
             base_salary = comp_management_sheet.cell(row=row, column=8).value
             on_going_reimbursements = f"=VLOOKUP(A{row},'Comp Management'!$A$2:$AA${comp_management_sheet.max_row},23,FALSE)"
-            sub_total = comp_management_sheet.cell(row=row, column=24).value
+            sub_total = f"=VLOOKUP(A{row},'Comp Management'!$A$2:$AA${comp_management_sheet.max_row},24,FALSE)"
             comments = f"=VLOOKUP(A{row},'Comp Management'!$A$2:$AA${comp_management_sheet.max_row},25,FALSE)"
             bonus = comp_management_sheet.cell(row=row, column=26).value
             total = comp_management_sheet.cell(row=row, column=27).value
