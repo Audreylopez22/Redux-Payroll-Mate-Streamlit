@@ -31,14 +31,8 @@ def process_simple_sheet(sheet):
         apply_money_style_to_range(sheet, 2, 6, money_style)
 
         for row in range(2, last_row + 1):
-            B = "B"
-            C = "C"
             D = "D"
             F = "F"
-
-            # Calculate Sub Total
-            sheet[f"D{row}"].value = f"={B}{row}+{C}{row}"
-            sheet[f"G{row}"].style = money_style
 
             # Total
             sheet[f"G{row}"].value = f"={F}{row}+{D}{row}"

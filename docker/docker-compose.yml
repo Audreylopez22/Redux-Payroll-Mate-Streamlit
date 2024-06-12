@@ -21,3 +21,19 @@ services:
       - streamlitdocker
     volumes:
       - ".:/app"
+
+  cypress:
+    image: "cypress/redux_payroll_mate:${DATE:-latest}"
+    container_name: cypress_redux_PM
+    hostname: cypress_redux_PM
+    pull_policy: never
+    tty: true
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+      dockerfile: docker/streamlit_redux/cypress.df
+    networks:
+      - streamlitdocker
+    volumes:
+      - ".:/app"
