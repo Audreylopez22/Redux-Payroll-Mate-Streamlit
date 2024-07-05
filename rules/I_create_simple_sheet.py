@@ -15,6 +15,12 @@ def create_simple_sheet(workbook):
             "Comments",
             "Bonus/Additional",
             "Total",
+            "Distributing payroll",
+            "Principal Account",
+            "Principal Account value",
+            "Principal Account value",
+            "Secondary Account",
+            "Secondary Account value",
         ]
 
         for i, column_name in enumerate(new_columns, start=1):

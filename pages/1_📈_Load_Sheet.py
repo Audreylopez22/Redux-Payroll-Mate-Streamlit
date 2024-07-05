@@ -59,9 +59,10 @@ def process_rules(workbook, progress_bar):
             "I_create_simple_sheet.py",
             "J_bonus.py",
             "K_simple_sheets_values.py",
-            "L_process_simple_sheet.py",
-            "M_new_employee_alert.py",
-            "N_alert_inactive_person.py",
+            "L_distributing_payroll.py",
+            "M_process_simple_sheet.py",
+            "N_new_employee_alert.py",
+            "O_alert_inactive_person.py",
         ]
         total_steps = len(rule_files)
 

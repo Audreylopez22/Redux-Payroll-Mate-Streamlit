@@ -38,6 +38,22 @@ def process_simple_sheet(sheet):
             sheet[f"G{row}"].value = f"={F}{row}+{D}{row}"
             sheet[f"G{row}"].style = money_style
 
+            # Secondary Account value
+            if sheet[f"J{row}"].value is not None:
+                if (
+                    sheet[f"G{row}"].value is not None
+                    and isinstance(sheet[f"G{row}"].value, (int, float))
+                    and isinstance(sheet[f"J{row}"].value, (int, float))
+                ):
+                    sheet[f"K{row}"].value = min(sheet[f"G{row}"].value, sheet[f"J{row}"].value)
+                else:
+                    sheet[f"K{row}"].value = f"=MIN(G{row},J{row})"
+                sheet[f"K{row}"].style = money_style
+
+                sheet[f"M{row}"].value = f"=IF(J{row}<G{row},G{row}-J{row},0)"
+                sheet[f"M{row}"].style = money_style
+                sheet.column_dimensions["J"].hidden = True
+
         return sheet
 
     return sheet
