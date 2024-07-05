@@ -2,11 +2,13 @@ from tools import log_message
 
 
 def main(workbook, progress_bar):
-    expected_sheets = {"Comp Management", "Bonus Sheet"}
+    expected_sheets = {"Comp Management", "Bonus Sheet", "Distributing payroll"}
     existing_sheets = set(sheet.title for sheet in workbook)
 
     if expected_sheets.issubset(existing_sheets) and len(existing_sheets) == 2:
-        log_message("The document has the required sheets: 'Comp Management' and 'Bonus Sheet'.")
+        log_message(
+            "The document has the required sheets: 'Comp Management', 'Bonus Sheet' and 'Distributing payroll'."
+        )
 
         if progress_bar is not None:
             progress_bar.progress(1.0 / len(workbook.sheetnames))

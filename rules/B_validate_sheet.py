@@ -45,6 +45,15 @@ def validate_sheet(sheet):
                 "Bonus: Comment",
             ]
         },
+        "Distributing payroll": {
+            "expected_columns": [
+                "Last name, First name",
+                "Distributing your payroll across multiple accounts",
+                "Main bank account for distribute your payroll across multiple accounts",
+                "Set a top amount for your main bank account used in distributed payroll.",
+                "Secondary bank account for distributing payroll across multiple accounts",
+            ]
+        },
     }
 
     sheet_name = sheet.title
