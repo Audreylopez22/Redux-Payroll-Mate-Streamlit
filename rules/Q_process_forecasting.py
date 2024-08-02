@@ -80,21 +80,44 @@ def calculate_forecasting(sheet):
         apply_money_style_to_range(sheet, 5, 9, money_style)
 
         for row in range(2, last_row + 1):
+
+            C = "C"
+            E = "E"
+            G = "G"
+            I = "I"  # noqa: E741
+            K = "K"
+
             # 3%
             sheet[f"E{row}"].value = f"=C{row}*$E$1"
             sheet[f"E{row}"].style = money_style
 
-            # 5%
-            sheet[f"F{row}"].value = f"=C{row}*$F$1"
+            # total 3%
+            sheet[f"F{row}"].value = f"={C}{row}+{E}{row}"
             sheet[f"F{row}"].style = money_style
 
-            # 7%
+            # 5%
             sheet[f"G{row}"].value = f"=C{row}*$G$1"
             sheet[f"G{row}"].style = money_style
 
-            # 10%
-            sheet[f"H{row}"].value = f"=C{row}*$H$1"
+            # total 5%
+            sheet[f"H{row}"].value = f"={C}{row}+{G}{row}"
             sheet[f"H{row}"].style = money_style
+
+            # 7%
+            sheet[f"I{row}"].value = f"=C{row}*$I$1"
+            sheet[f"I{row}"].style = money_style
+
+            # total 7%
+            sheet[f"J{row}"].value = f"={C}{row}+{I}{row}"
+            sheet[f"J{row}"].style = money_style
+
+            # 10%
+            sheet[f"K{row}"].value = f"=C{row}*$K$1"
+            sheet[f"K{row}"].style = money_style
+
+            # total 10%
+            sheet[f"L{row}"].value = f"={C}{row}+{K}{row}"
+            sheet[f"L{row}"].style = money_style
 
         return sheet
 

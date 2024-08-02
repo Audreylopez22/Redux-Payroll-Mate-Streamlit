@@ -13,10 +13,13 @@ def create_forecasting(workbook):
             "Pay rate",
             "Hire Date",
             "3 %",
+            "total 3%",
             "5 %",
+            "total 5%",
             "7%",
+            "total 7%",
             "10%",
-            "Others",
+            "total 10 %",
         ]
 
         for i, column_name in enumerate(new_columns, start=1):
