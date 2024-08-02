@@ -80,11 +80,13 @@ def calculate_forecasting(sheet):
         apply_money_style_to_range(sheet, 5, 9, money_style)
 
         for row in range(2, last_row + 1):
+
             C = "C"
             E = "E"
             G = "G"
             I = "I"  # noqa: E741
             K = "K"
+
             # 3%
             sheet[f"E{row}"].value = f"=C{row}*$E$1"
             sheet[f"E{row}"].style = money_style
